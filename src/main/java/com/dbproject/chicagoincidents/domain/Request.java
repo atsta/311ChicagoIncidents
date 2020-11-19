@@ -1,29 +1,26 @@
 package com.dbproject.chicagoincidents.domain;
 
 import com.sun.istack.Nullable;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
-import javax.persistence.Table;
+
+import javax.persistence.*;
+import java.io.Serializable;
 import java.util.Date;
-import javax.persistence.Transient;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 
+import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.CascadeType;
+
 @Entity
 @Table(name="request", schema = "public")
-public class Request {
+public class Request implements Serializable {
+    @Id
+    @GeneratedValue(strategy=GenerationType.AUTO)
+    private long id;
 
     @Transient
     private final DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
 
-    @Id
-    @GeneratedValue(strategy=GenerationType.AUTO)
-    int id;
     String srn;
     String type;
     String status;
@@ -45,11 +42,21 @@ public class Request {
     @Nullable
     int wards;
 
-    public int getId() {
+    @OneToOne(fetch = FetchType.LAZY, mappedBy = "request")
+    @Cascade({CascadeType.ALL})
+    private Location location;
+
+    @OneToOne(fetch = FetchType.LAZY, mappedBy = "vehicle")
+    @Cascade({CascadeType.DELETE})
+    private Vehicle vehicle;
+
+    public Request() {}
+
+    public long getId() {
         return id;
     }
 
-    public void setID(int id) {
+    public void setID(long id) {
         this.id = id;
     }
 
@@ -166,5 +173,4 @@ public class Request {
     public void setWards(int wards) {
         this.wards = wards;
     }
-
 }
