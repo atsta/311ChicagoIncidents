@@ -1,5 +1,6 @@
 package com.dbproject.chicagoincidents.domain;
 
+import com.sun.istack.Nullable;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -28,6 +29,21 @@ public class Request {
     String status;
     Date creation_date;
     Date completion_date;
+
+    int ward;
+    int police_distinct;
+    int community_area;
+
+    @Nullable
+    int historical_wards;
+    @Nullable
+    int zip_codes;
+    @Nullable
+    int community_areas;
+    @Nullable
+    int census_tracks;
+    @Nullable
+    int wards;
 
     public int getId() {
         return id;
@@ -86,4 +102,69 @@ public class Request {
     public void setCreation_date(Date creation_date) {
         this.creation_date= creation_date;
     }
+
+    public int getWard() {
+        return ward;
+    }
+
+    public void setWard(int ward) {
+        this.ward = ward;
+    }
+
+    public int getPolice_distinct() {
+        return police_distinct;
+    }
+
+    public void setPolice_distinct(int police_distinct) {
+        this.police_distinct = police_distinct;
+    }
+
+    public int getCommunity_area() {
+        return community_area;
+    }
+
+    public void setCommunity_area(int community_area) {
+        this.community_area = community_area;
+    }
+
+    public int getHistorical_wards() {
+        return historical_wards;
+    }
+
+    public void setHistorical_wards(int historical_wards) {
+        this.historical_wards = historical_wards;
+    }
+
+    public int getZip_codes() {
+        return zip_codes;
+    }
+
+    public void setZip_codes(int zip_codes) {
+        this.zip_codes = zip_codes;
+    }
+
+    public int getCommunity_areas() {
+        return community_areas;
+    }
+
+    public void setCommunity_areas(int community_areas) {
+        this.community_areas = community_areas;
+    }
+
+    public int getCensus_tracks() {
+        return census_tracks;
+    }
+
+    public void setCensus_tracks(int census_tracks) {
+        this.census_tracks = census_tracks;
+    }
+
+    public int getWards() {
+        return wards;
+    }
+
+    public void setWards(int wards) {
+        this.wards = wards;
+    }
+
 }
