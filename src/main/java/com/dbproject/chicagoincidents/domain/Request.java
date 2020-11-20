@@ -46,7 +46,7 @@ public class Request implements Serializable {
     @Cascade({CascadeType.ALL})
     private Location location;
 
-    @OneToOne(fetch = FetchType.EAGER, mappedBy = "vehicle")
+    @OneToOne(fetch = FetchType.EAGER, mappedBy = "request")
     @Cascade({CascadeType.DELETE})
     private Vehicle vehicle;
 
@@ -56,7 +56,7 @@ public class Request implements Serializable {
         return id;
     }
 
-    public void setID(long id) {
+    public void setID(Integer id) {
         this.id = id;
     }
 

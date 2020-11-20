@@ -1,52 +1,37 @@
 package com.dbproject.chicagoincidents.domain;
 
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
-import javax.persistence.Table;
-import javax.persistence.Column;
+import javax.persistence.*;
 
 @Entity
 @Table(name="location", schema = "public")
 public class Location {
-
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id")
-    private long id;
+    private long location_id;
 
     String address;
     int zip_codes;
     double x_coordinate;
     double y_coordinate;
     double latitude;
-    double lognitude;
+    double longitude;
 
-    @OneToOne(fetch = FetchType.LAZY, optional = false)
+
+    @OneToOne(fetch = FetchType.EAGER, optional = true)
+    @MapsId
     @JoinColumn(name = "id", nullable = false)
     private Request request;
 
     public Location() {}
 
-    public Location(String address, int zip_codes, double x_coordinate, double y_coordinate, double latitude, double lognitude) {
+    public Location(String address, int zip_codes, double x_coordinate, double y_coordinate, double latitude, double longitude) {
         this.address = address;
         this.zip_codes = zip_codes;
         this.x_coordinate = x_coordinate;
         this.y_coordinate = y_coordinate;
         this.latitude = latitude;
-        this. lognitude = lognitude;
-    }
-
-    public long getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
+        this. longitude = longitude;
     }
 
     public double getX_coordinate() {
@@ -73,12 +58,12 @@ public class Location {
         this.latitude = latitude;
     }
 
-    public double getLognitude() {
-        return lognitude;
+    public double getLongitude() {
+        return longitude;
     }
 
-    public void setLognitude(double lognitude) {
-        this.lognitude= lognitude;
+    public void setLongitude(double longitude) {
+        this.longitude= longitude;
     }
 
     public String getAddress() {
