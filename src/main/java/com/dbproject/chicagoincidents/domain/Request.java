@@ -7,6 +7,7 @@ import java.io.Serializable;
 import java.util.Date;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.Set;
 
 import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.CascadeType;
@@ -53,6 +54,22 @@ public class Request implements Serializable {
     @OneToOne(fetch = FetchType.EAGER, mappedBy = "request")
     @Cascade({CascadeType.DELETE})
     private HasSSA hasSSA;
+
+    @OneToOne(fetch = FetchType.EAGER, mappedBy = "request")
+    @Cascade({CascadeType.DELETE})
+    private Activities activities;
+
+    @OneToOne(fetch = FetchType.EAGER, mappedBy = "request")
+    @Cascade({CascadeType.DELETE})
+    private RelativeLocation relativeLocation;
+
+    @OneToOne(fetch = FetchType.EAGER, mappedBy = "request")
+    @Cascade({CascadeType.DELETE})
+    private Specification specification;
+
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "request")
+    @Cascade({CascadeType.DELETE})
+    private Set<Quantitative> quantitative;
 
     public Request() {}
 
