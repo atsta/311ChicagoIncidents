@@ -1,0 +1,33 @@
+package com.dbproject.chicagoincidents.domain;
+
+import javax.persistence.*;
+
+@Entity
+@Table(name="has_specification", schema = "public")
+public class Specification {
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "id")
+    private long specification_id;
+
+    String specification;
+
+    @OneToOne(fetch = FetchType.EAGER, optional = true)
+    @MapsId
+    @JoinColumn(name = "id", nullable = false)
+    private Request request;
+
+    public Specification() {}
+
+    public Specification(String specification) {
+        this.specification = specification;
+    }
+
+    public String getSpecification() {
+        return specification;
+    }
+
+    public void setSpecification(String specification) {
+        this.specification = specification;
+    }
+}
