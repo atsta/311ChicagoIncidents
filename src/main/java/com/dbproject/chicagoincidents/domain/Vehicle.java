@@ -28,7 +28,7 @@ public class Vehicle {
     @Nullable
     int days_abandoned;
 
-    @OneToOne(fetch = FetchType.LAZY, optional = false)
+    @OneToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "id", nullable = false)
     private Request request;
 

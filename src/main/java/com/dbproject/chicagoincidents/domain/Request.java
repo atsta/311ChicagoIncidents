@@ -42,11 +42,11 @@ public class Request implements Serializable {
     @Nullable
     int wards;
 
-    @OneToOne(fetch = FetchType.LAZY, mappedBy = "request")
+    @OneToOne(fetch = FetchType.EAGER, mappedBy = "request")
     @Cascade({CascadeType.ALL})
     private Location location;
 
-    @OneToOne(fetch = FetchType.LAZY, mappedBy = "vehicle")
+    @OneToOne(fetch = FetchType.EAGER, mappedBy = "vehicle")
     @Cascade({CascadeType.DELETE})
     private Vehicle vehicle;
 
