@@ -50,7 +50,27 @@ public class Request implements Serializable {
     @Cascade({CascadeType.DELETE})
     private Vehicle vehicle;
 
+    @OneToOne(fetch = FetchType.EAGER, mappedBy = "request")
+    @Cascade({CascadeType.DELETE})
+    private HasSSA hasSSA;
+
     public Request() {}
+
+    public Request(String srn, String type, String status, Date creation_date, Date completion_date, int ward, int police_distinct, int community_area, int historical_wards, int zip_codes, int community_areas, int census_tracks, int wards) {
+        this.srn = srn;
+        this.type = type;
+        this.status = status;
+        this.creation_date = creation_date;
+        this.completion_date = completion_date;
+        this.ward = ward;
+        this.police_distinct = police_distinct;
+        this.community_area = community_area;
+        this.historical_wards = historical_wards;
+        this.zip_codes = zip_codes;
+        this.community_areas = community_areas;
+        this.census_tracks = census_tracks;
+        this.wards = wards;
+    }
 
     public long getId() {
         return id;
@@ -60,7 +80,7 @@ public class Request implements Serializable {
         this.id = id;
     }
 
-    public String getSRN() {
+    public String getSrn() {
         return srn;
     }
 
