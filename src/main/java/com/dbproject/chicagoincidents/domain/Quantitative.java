@@ -9,7 +9,6 @@ import javax.persistence.*;
 public class Quantitative {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "id")
     private long quantitative_id;
 
     //enum: hole pots filled, carts delivered, premises baited, premises with garbage, premises with rats
@@ -18,7 +17,6 @@ public class Quantitative {
     Long quantity;
 
     @ManyToOne(fetch = FetchType.EAGER)
-    @MapsId
     @JoinColumn(name = "id", nullable = false)
     private Request request;
 
