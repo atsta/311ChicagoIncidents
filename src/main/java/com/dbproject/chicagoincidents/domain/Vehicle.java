@@ -17,7 +17,7 @@ public class Vehicle {
     String model;
     String color;
     @Nullable
-    int days_abandoned;
+    double days_abandoned;
 
     @OneToOne(fetch = FetchType.EAGER, optional = true)
     @MapsId
@@ -45,7 +45,7 @@ public class Vehicle {
         return color;
     }
 
-    public int getDays_abandoned() {
+    public double getDays_abandoned() {
         return days_abandoned;
     }
 
@@ -61,7 +61,7 @@ public class Vehicle {
         this.color = color;
     }
 
-    public void setDays_abandoned(int days_abandoned) {
+    public void setDays_abandoned(double days_abandoned) {
         this.days_abandoned = days_abandoned;
     }
 }

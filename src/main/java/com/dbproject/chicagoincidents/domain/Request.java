@@ -9,8 +9,8 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Set;
 
-import org.hibernate.annotations.Cascade;
-import org.hibernate.annotations.CascadeType;
+import javax.persistence.CascadeType;
+
 
 @Entity
 @Table(name="request", schema = "public")
@@ -28,7 +28,7 @@ public class Request implements Serializable {
     Date creation_date;
     Date completion_date;
 
-    int ward;
+    double ward;
     int police_distinct;
     int community_area;
 
@@ -43,32 +43,25 @@ public class Request implements Serializable {
     @Nullable
     int wards;
 
-    @OneToOne(fetch = FetchType.EAGER, mappedBy = "request")
-    @Cascade({CascadeType.ALL})
+    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "request")
     private Location location;
 
-    @OneToOne(fetch = FetchType.EAGER, mappedBy = "request")
-    @Cascade({CascadeType.DELETE})
+    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.REMOVE, mappedBy = "request")
     private Vehicle vehicle;
 
-    @OneToOne(fetch = FetchType.EAGER, mappedBy = "request")
-    @Cascade({CascadeType.DELETE})
+    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.REMOVE, mappedBy = "request")
     private HasSSA hasSSA;
 
-    @OneToOne(fetch = FetchType.EAGER, mappedBy = "request")
-    @Cascade({CascadeType.DELETE})
+    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.REMOVE, mappedBy = "request")
     private Activities activities;
 
-    @OneToOne(fetch = FetchType.EAGER, mappedBy = "request")
-    @Cascade({CascadeType.DELETE})
+    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.REMOVE, mappedBy = "request")
     private RelativeLocation relativeLocation;
 
-    @OneToOne(fetch = FetchType.EAGER, mappedBy = "request")
-    @Cascade({CascadeType.DELETE})
+    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.REMOVE, mappedBy = "request")
     private Specification specification;
 
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "request")
-    @Cascade({CascadeType.DELETE})
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.REMOVE,orphanRemoval = true, mappedBy = "request")
     private Set<Quantitative> quantitative;
 
     public Request() {}
@@ -147,11 +140,11 @@ public class Request implements Serializable {
         this.creation_date= creation_date;
     }
 
-    public int getWard() {
+    public double getWard() {
         return ward;
     }
 
-    public void setWard(int ward) {
+    public void setWard(double ward) {
         this.ward = ward;
     }
 

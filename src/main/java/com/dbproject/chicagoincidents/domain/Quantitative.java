@@ -8,7 +8,7 @@ import javax.persistence.*;
 @Table(name="has_Quantitative", schema = "public")
 public class Quantitative {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long quantitative_id;
 
     //enum: hole pots filled, carts delivered, premises baited, premises with garbage, premises with rats
@@ -26,6 +26,14 @@ public class Quantitative {
     public Quantitative(String quantity_type, Long quantity) {
         this.quantity_type = quantity_type;
         this.quantity = quantity;
+    }
+
+    public long getQuantitative_id() {
+        return quantitative_id;
+    }
+
+    public void setQuantitative_id(long quantitative_id) {
+        this.quantitative_id = quantitative_id;
     }
 
     public String getQuantity_type() {
