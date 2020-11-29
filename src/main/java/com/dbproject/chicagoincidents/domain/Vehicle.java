@@ -14,10 +14,12 @@ public class Vehicle {
 
     @Nullable
     String license_plate;
+    @Nullable
     String model;
+    @Nullable
     String color;
     @Nullable
-    double days_abandoned;
+    long days_abandoned;
 
     @OneToOne(fetch = FetchType.EAGER, optional = true)
     @MapsId
@@ -45,7 +47,7 @@ public class Vehicle {
         return color;
     }
 
-    public double getDays_abandoned() {
+    public long getDays_abandoned() {
         return days_abandoned;
     }
 
@@ -61,7 +63,7 @@ public class Vehicle {
         this.color = color;
     }
 
-    public void setDays_abandoned(double days_abandoned) {
+    public void setDays_abandoned(long days_abandoned) {
         this.days_abandoned = days_abandoned;
     }
 }
