@@ -6,6 +6,7 @@ import com.dbproject.chicagoincidents.repository.RequestRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -25,5 +26,10 @@ public class RequestService {
 
     public Optional<Request> getRequestRepository(Long id) {
         return requestRepository.findById(id);
+    }
+
+    public List<String> getRequestsById(){
+        List<String> dbRequest = requestRepository.queryAnnotationTest1();
+        return dbRequest;
     }
 }
