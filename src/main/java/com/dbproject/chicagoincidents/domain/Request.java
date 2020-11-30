@@ -29,19 +29,19 @@ public class Request implements Serializable {
     Date completion_date;
 
     double ward;
-    int police_distinct;
-    int community_area;
+    Integer police_distinct;
+    Integer community_area;
 
     @Nullable
-    int historical_wards;
+    Integer historical_wards;
     @Nullable
-    int zip_codes;
+    Integer zip_codes;
     @Nullable
-    int community_areas;
+    Integer community_areas;
     @Nullable
-    int census_tracks;
+    Integer census_tracks;
     @Nullable
-    int wards;
+    Integer wards;
 
     @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "request")
     private Location location;
@@ -66,7 +66,7 @@ public class Request implements Serializable {
 
     public Request() {}
 
-    public Request(String srn, String type, String status, Date creation_date, Date completion_date, int ward, int police_distinct, int community_area, int historical_wards, int zip_codes, int community_areas, int census_tracks, int wards) {
+    public Request(String srn, String type, String status, Date creation_date, Date completion_date, Integer ward, Integer police_distinct, Integer community_area, Integer historical_wards, Integer zip_codes, Integer community_areas, Integer census_tracks, Integer wards) {
         this.srn = srn;
         this.type = type;
         this.status = status;
@@ -148,59 +148,59 @@ public class Request implements Serializable {
         this.ward = ward;
     }
 
-    public int getPolice_distinct() {
+    public Integer getPolice_distinct() {
         return police_distinct;
     }
 
-    public void setPolice_distinct(int police_distinct) {
+    public void setPolice_distinct(Integer police_distinct) {
         this.police_distinct = police_distinct;
     }
 
-    public int getCommunity_area() {
+    public Integer getCommunity_area() {
         return community_area;
     }
 
-    public void setCommunity_area(int community_area) {
+    public void setCommunity_area(Integer community_area) {
         this.community_area = community_area;
     }
 
-    public int getHistorical_wards() {
+    public Integer getHistorical_wards() {
         return historical_wards;
     }
 
-    public void setHistorical_wards(int historical_wards) {
+    public void setHistorical_wards(Integer historical_wards) {
         this.historical_wards = historical_wards;
     }
 
-    public int getZip_codes() {
+    public Integer getZip_codes() {
         return zip_codes;
     }
 
-    public void setZip_codes(int zip_codes) {
+    public void setZip_codes(Integer zip_codes) {
         this.zip_codes = zip_codes;
     }
 
-    public int getCommunity_areas() {
+    public Integer getCommunity_areas() {
         return community_areas;
     }
 
-    public void setCommunity_areas(int community_areas) {
+    public void setCommunity_areas(Integer community_areas) {
         this.community_areas = community_areas;
     }
 
-    public int getCensus_tracks() {
+    public Integer getCensus_tracks() {
         return census_tracks;
     }
 
-    public void setCensus_tracks(int census_tracks) {
+    public void setCensus_tracks(Integer census_tracks) {
         this.census_tracks = census_tracks;
     }
 
-    public int getWards() {
+    public Integer getWards() {
         return wards;
     }
 
-    public void setWards(int wards) {
+    public void setWards(Integer wards) {
         this.wards = wards;
     }
 }

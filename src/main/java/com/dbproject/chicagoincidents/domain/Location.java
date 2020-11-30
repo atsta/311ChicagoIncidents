@@ -11,7 +11,7 @@ public class Location {
     private long location_id;
 
     String address;
-    int zip_codes;
+    Integer zip_codes;
     double x_coordinate;
     double y_coordinate;
     double latitude;
@@ -25,7 +25,7 @@ public class Location {
 
     public Location() {}
 
-    public Location(String address, int zip_codes, double x_coordinate, double y_coordinate, double latitude, double longitude) {
+    public Location(String address, Integer zip_codes, double x_coordinate, double y_coordinate, double latitude, double longitude) {
         this.address = address;
         this.zip_codes = zip_codes;
         this.x_coordinate = x_coordinate;
@@ -74,11 +74,11 @@ public class Location {
         this.address = address;
     }
 
-    public int getZip_codes() {
+    public Integer getZip_codes() {
         return zip_codes;
     }
 
-    public void setZip_codes(int zip_codes) {
+    public void setZip_codes(Integer zip_codes) {
         this.zip_codes = zip_codes;
     }
 

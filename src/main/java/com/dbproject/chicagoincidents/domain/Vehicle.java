@@ -10,7 +10,7 @@ public class Vehicle {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id")
-    private long vehicle_id;
+    private Long vehicle_id;
 
     @Nullable
     String license_plate;
@@ -19,7 +19,7 @@ public class Vehicle {
     @Nullable
     String color;
     @Nullable
-    long days_abandoned;
+    Long days_abandoned;
 
     @OneToOne(fetch = FetchType.EAGER, optional = true)
     @MapsId
@@ -28,7 +28,7 @@ public class Vehicle {
 
     public Vehicle() {}
 
-    public Vehicle(String license_plate, String model, String color, int days_abandoned) {
+    public Vehicle(String license_plate, String model, String color, Long days_abandoned) {
         this.license_plate = license_plate;
         this.model = model;
         this.color = color;
@@ -47,7 +47,7 @@ public class Vehicle {
         return color;
     }
 
-    public long getDays_abandoned() {
+    public Long getDays_abandoned() {
         return days_abandoned;
     }
 
@@ -63,7 +63,7 @@ public class Vehicle {
         this.color = color;
     }
 
-    public void setDays_abandoned(long days_abandoned) {
+    public void setDays_abandoned(Long days_abandoned) {
         this.days_abandoned = days_abandoned;
     }
 }

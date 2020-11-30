@@ -1,0 +1,33 @@
+<!DOCTYPE HTML>
+<html layout:decorator="layout" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.w3.org/1999/xhtml">
+<body>
+<th:block layout:fragment="content">
+
+    <div class="row">
+        <div class="col-md-8 col-sm-8">
+            <div class="panel panel-default">
+                <div class="panel-heading">Request List</div>
+                <div class="panel-body">
+                    <table class="table table-striped">
+                        <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>SRN</th>
+                            <th>Creation Date</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr th:object="${request}">
+                            <td th:text="${request.getId()}">ID</td>
+                            <td th:text="${request.getSrn()}">SRN</td>
+                            <td th:text="${request.getCreation_date()}">Creation Date</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</th:block>
+</body>
+</html>

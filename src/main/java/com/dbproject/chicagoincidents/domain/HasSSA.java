@@ -10,7 +10,7 @@ public class HasSSA {
     @Column(name = "id")
     private long ssa_id;
 
-    int ssa_value;
+    Integer ssa_value;
 
     @OneToOne(fetch = FetchType.EAGER, optional = true)
     @MapsId
@@ -19,15 +19,15 @@ public class HasSSA {
 
     public HasSSA() {}
 
-    public HasSSA(int ssa_value) {
+    public HasSSA(Integer ssa_value) {
         this.ssa_value = ssa_value;
     }
 
-    public int getSsa_value() {
+    public Integer getSsa_value() {
         return ssa_value;
     }
 
-    public void setSsa_value(int ssa_value) {
+    public void setSsa_value(Integer ssa_value) {
         this.ssa_value = ssa_value;
     }
 }
