@@ -14,7 +14,7 @@ public class Quantitative {
     //enum: hole pots filled, carts delivered, premises baited, premises with garbage, premises with rats
     String quantity_type;
     @Nullable
-    double quantity;
+    Double quantity;
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "id", nullable = false)
@@ -23,7 +23,7 @@ public class Quantitative {
 
     public Quantitative() {}
 
-    public Quantitative(String quantity_type, double quantity) {
+    public Quantitative(String quantity_type, Double quantity) {
         this.quantity_type = quantity_type;
         this.quantity = quantity;
     }
@@ -44,11 +44,11 @@ public class Quantitative {
         this.quantity_type = quantity_type;
     }
 
-    public double getQuantity() {
+    public Double getQuantity() {
         return quantity;
     }
 
-    public void setQuantity(double quantity) {
+    public void setQuantity(Double quantity) {
         this.quantity = quantity;
     }
 }

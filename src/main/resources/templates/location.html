@@ -1,0 +1,32 @@
+<!DOCTYPE HTML>
+<html layout:decorator="layout" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.w3.org/1999/xhtml">
+<body>
+<th:block layout:fragment="content">
+    <div class="row">
+        <div class="col-md-8 col-sm-8">
+            <div class="panel panel-default">
+                <div class="panel-heading">Request Location List</div>
+                <div class="panel-body">
+                    <table class="table table-striped">
+                        <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Address</th>
+                            <th>Zip_code</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr th:each="request : ${requests}">
+                            <td th:text="${request.getRequest().getId()}">ID</td>
+                            <td th:text="${request.getAddress()}">Address</td>
+                            <td th:text="${request.getZipcodes()}">Zip_code</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</th:block>
+</body>
+</html>

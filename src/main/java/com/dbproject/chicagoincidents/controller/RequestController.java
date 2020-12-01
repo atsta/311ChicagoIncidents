@@ -30,9 +30,9 @@ public class RequestController {
         return modelAndView;
     }
 
-    /*@GetMapping("/request")
-    ModelAndView home() {
-        Optional<Request> dbRequest = requestService.getRequestRepository((long) 0);
+    @GetMapping("/request")
+    ModelAndView request() {
+        Optional<Request> dbRequest = requestService.getRequestRepository((long) 3);
 
         if(dbRequest.isPresent()) {
             Request existingRequest = dbRequest.get();
@@ -44,5 +44,7 @@ public class RequestController {
             ModelAndView modelAndView = new ModelAndView("error");
             return modelAndView;
         }
-    }*/
+    }
+
+
 }

@@ -28,7 +28,7 @@ public class Request implements Serializable {
     Date creation_date;
     Date completion_date;
 
-    double ward;
+    Double ward;
     Integer police_distinct;
     Integer community_area;
 
@@ -66,7 +66,7 @@ public class Request implements Serializable {
 
     public Request() {}
 
-    public Request(String srn, String type, String status, Date creation_date, Date completion_date, Integer ward, Integer police_distinct, Integer community_area, Integer historical_wards, Integer zip_codes, Integer community_areas, Integer census_tracks, Integer wards) {
+    public Request(String srn, String type, String status, Date creation_date, Date completion_date, Double ward, Integer police_distinct, Integer community_area, Integer historical_wards, Integer zip_codes, Integer community_areas, Integer census_tracks, Integer wards) {
         this.srn = srn;
         this.type = type;
         this.status = status;
@@ -140,11 +140,11 @@ public class Request implements Serializable {
         this.creation_date= creation_date;
     }
 
-    public double getWard() {
+    public Double getWard() {
         return ward;
     }
 
-    public void setWard(double ward) {
+    public void setWard(Double ward) {
         this.ward = ward;
     }
 

@@ -11,11 +11,12 @@ public class Location {
     private long location_id;
 
     String address;
-    Integer zip_codes;
-    double x_coordinate;
-    double y_coordinate;
-    double latitude;
-    double longitude;
+    @Column(name="zip_codes")
+    Integer zipcodes;
+    Double x_coordinate;
+    Double y_coordinate;
+    Double latitude;
+    Double longitude;
 
 
     @OneToOne(fetch = FetchType.EAGER, optional = true)
@@ -23,46 +24,50 @@ public class Location {
     @JoinColumn(name = "id", nullable = false)
     private Request request;
 
+    public Request getRequest() {
+        return request;
+    }
+
     public Location() {}
 
-    public Location(String address, Integer zip_codes, double x_coordinate, double y_coordinate, double latitude, double longitude) {
+    public Location(String address, Integer zip_codes, Double x_coordinate, Double y_coordinate, Double latitude, Double longitude) {
         this.address = address;
-        this.zip_codes = zip_codes;
+        this.zipcodes = zip_codes;
         this.x_coordinate = x_coordinate;
         this.y_coordinate = y_coordinate;
         this.latitude = latitude;
         this. longitude = longitude;
     }
 
-    public double getX_coordinate() {
+    public Double getX_coordinate() {
         return x_coordinate;
     }
 
-    public void setX_coordinate(double x_coordinate) {
+    public void setX_coordinate(Double x_coordinate) {
         this.x_coordinate = x_coordinate;
     }
 
-    public double getY_coordinate() {
+    public Double getY_coordinate() {
         return y_coordinate;
     }
 
-    public void setY_coordinate(double y_coordinate) {
+    public void setY_coordinate(Double y_coordinate) {
         this.y_coordinate = y_coordinate;
     }
 
-    public double getLatitude() {
+    public Double getLatitude() {
         return latitude;
     }
 
-    public void setLatitude(double latitude) {
+    public void setLatitude(Double latitude) {
         this.latitude = latitude;
     }
 
-    public double getLongitude() {
+    public Double getLongitude() {
         return longitude;
     }
 
-    public void setLongitude(double longitude) {
+    public void setLongitude(Double longitude) {
         this.longitude= longitude;
     }
 
@@ -74,12 +79,12 @@ public class Location {
         this.address = address;
     }
 
-    public Integer getZip_codes() {
-        return zip_codes;
+    public Integer getZipcodes() {
+        return zipcodes;
     }
 
     public void setZip_codes(Integer zip_codes) {
-        this.zip_codes = zip_codes;
+        this.zipcodes = zip_codes;
     }
 
 }

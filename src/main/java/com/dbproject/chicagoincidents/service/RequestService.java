@@ -32,4 +32,5 @@ public class RequestService {
         List<String> dbRequest = requestRepository.queryAnnotationTest1();
         return dbRequest;
     }
+
 }
