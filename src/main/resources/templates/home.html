@@ -5,21 +5,12 @@
     <div class="row">
         <div class="col-md-8 col-sm-8">
             <div class="panel panel-default">
-                <div class="panel-heading">Request List</div>
                 <div class="panel-body">
-                    <table class="table table-striped">
-                        <thead>
-                        <tr>
-                            <th>SRN</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <tr th:each="request : ${requests}">
-                            <td th:text="${request}">SRN</td>
-
-                        </tr>
-                        </tbody>
-                    </table>
+                    <h3>Select a query of the following list:</h3>
+                        <a th:href="@{/address}">Find all incidents that took place in a specific street</a>
+                        <br><br>
+                        <a th:href="@{/zipcode}">Find all incidents that took place in a specific zipcode</a>
+                        <br><br>
                 </div>
             </div>
         </div>

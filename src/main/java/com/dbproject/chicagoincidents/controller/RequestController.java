@@ -24,11 +24,17 @@ public class RequestController {
 
     @GetMapping
     ModelAndView home() {
+        ModelAndView modelAndView = new ModelAndView("home");
+        return modelAndView;
+    }
+
+    /*
+    ModelAndView home() {
         List<String> dbRequest = requestService.getRequestsById();
         ModelAndView modelAndView = new ModelAndView("home");
         modelAndView.addObject("requests", dbRequest);
         return modelAndView;
-    }
+    }*/
 
     @GetMapping("/request")
     ModelAndView request() {

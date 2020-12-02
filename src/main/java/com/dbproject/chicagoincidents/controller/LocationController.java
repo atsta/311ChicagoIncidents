@@ -4,9 +4,9 @@ import com.dbproject.chicagoincidents.domain.Location;
 import com.dbproject.chicagoincidents.service.LocationService;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
@@ -19,17 +19,32 @@ public class LocationController {
 
     @GetMapping("/zipcode")
     ModelAndView zipcode() {
-        Iterable<Location> dbLocation = locationService.getLocationsByZipcode(60613);
-        ModelAndView modelAndView = new ModelAndView("location");
+        ModelAndView modelAndView = new ModelAndView("zipcode");
+        return modelAndView;
+    }
+
+    @PostMapping(value = "zipcode")
+    @ResponseStatus(value = HttpStatus.OK)
+    ModelAndView zipcode(@RequestParam Integer zipcode) throws Exception {
+        ModelAndView modelAndView = new ModelAndView("zipcode");
+        Iterable<Location> dbLocation = locationService.getLocationsByZipcode(zipcode);
         modelAndView.addObject("requests", dbLocation);
         return modelAndView;
     }
 
     @GetMapping("/address")
     ModelAndView address() {
-        Iterable<Location> dbLocation = locationService.getLocationsByAddress("628 W ADDISON ST");
-        ModelAndView modelAndView = new ModelAndView("location");
+        ModelAndView modelAndView = new ModelAndView("address");
+        return modelAndView;
+    }
+
+    @PostMapping(value = "address")
+    @ResponseStatus(value = HttpStatus.OK)
+    ModelAndView address(@RequestParam String address) throws Exception {
+        ModelAndView modelAndView = new ModelAndView("address");
+        Iterable<Location> dbLocation = locationService.getLocationsByAddress(address);
         modelAndView.addObject("requests", dbLocation);
         return modelAndView;
     }
+
 }
