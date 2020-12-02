@@ -55,6 +55,51 @@ public class RequestController {
         return modelAndView;
     }
 
+    @GetMapping("/query9")
+    ModelAndView query9() {
+        ModelAndView modelAndView = new ModelAndView("query9_10_11");
+        return modelAndView;
+    }
+
+    @PostMapping(value = "query9")
+    @ResponseStatus(value = HttpStatus.OK)
+    ModelAndView query9(@RequestParam Integer num) throws Exception {
+        ModelAndView modelAndView = new ModelAndView("query9_10_11");
+        List<Long> query9Result = requestService.getQuery9(num);
+        modelAndView.addObject("requests", query9Result);
+        return modelAndView;
+    }
+
+    @GetMapping("/query10")
+    ModelAndView query10() {
+        ModelAndView modelAndView = new ModelAndView("query9_10_11");
+        return modelAndView;
+    }
+
+    @PostMapping(value = "query10")
+    @ResponseStatus(value = HttpStatus.OK)
+    ModelAndView query10(@RequestParam Integer num) throws Exception {
+        ModelAndView modelAndView = new ModelAndView("query9_10_11");
+        List<Long> query9Result = requestService.getQuery10(num);
+        modelAndView.addObject("requests", query9Result);
+        return modelAndView;
+    }
+
+    @GetMapping("/query11")
+    ModelAndView query11() {
+        ModelAndView modelAndView = new ModelAndView("query9_10_11");
+        return modelAndView;
+    }
+
+    @PostMapping(value = "query11")
+    @ResponseStatus(value = HttpStatus.OK)
+    ModelAndView query11(@RequestParam Integer num) throws Exception {
+        ModelAndView modelAndView = new ModelAndView("query9_10_11");
+        List<Long> query9Result = requestService.getQuery11(num);
+        modelAndView.addObject("requests", query9Result);
+        return modelAndView;
+    }
+
     @GetMapping("/request")
     ModelAndView request() {
         Optional<Request> dbRequest = requestService.getRequestRepository((long) 3);
@@ -70,6 +115,5 @@ public class RequestController {
             return modelAndView;
         }
     }
-
 
 }

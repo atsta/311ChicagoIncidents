@@ -24,6 +24,18 @@ public class RequestService {
         return requestRepository.query2(dayfrom, dayto, type);
     }
 
+    public List<Long> getQuery9(Integer num) {
+        return requestRepository.query9(num);
+    }
+
+    public List<Long> getQuery10(Integer num) {
+        return requestRepository.query10(num);
+    }
+
+    public List<Long> getQuery11(Integer num) {
+        return requestRepository.query11(num);
+    }
+
     public Request addRequest(Request request) {
         requestRepository.save(request);
         return request;

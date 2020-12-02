@@ -1,0 +1,34 @@
+<!DOCTYPE HTML>
+<html layout:decorator="layout" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.w3.org/1999/xhtml">
+<body>
+<th:block layout:fragment="content">
+    <div class="row">
+        <h3>Rodent baiting requests with number of premises to be less than a specified
+            number</h3>
+        <br>
+        <form method="post" class="form-group">
+            <div class="form-group">
+                <label for="num">Enter a number:&nbsp;</label>
+                <br>
+                <input class="form-control" type="number" name="num" id="num" maxlength="10"/>
+            </div>
+            <br>
+            <input class="btn btn-primary" type="submit" value="Ok"/>
+        </form>
+        <br><br>
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th>Request ID </th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="request : ${requests}">
+                <td th:text="${request}  ">ID</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</th:block>
+</body>
+</html>

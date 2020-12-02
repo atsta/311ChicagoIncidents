@@ -26,4 +26,18 @@ public interface RequestRepository extends CrudRepository<Request, Long>{
             "cast(:dayto AS timestamp) AND type = :type", nativeQuery = true)
     List<Long> query2(@Param("dayfrom") String dayfrom, @Param("dayto") String dayto, @Param("type") String type);
 
+    @Query(value = "SELECT request.id\n" +
+            "FROM request, has_quantitative\n" +
+            "WHERE request.id = has_quantitative.id AND has_quantitative.quantity_type = 'Number of Premises Baited' AND has_quantitative.quantity < :num", nativeQuery = true)
+    List<Long> query9(@Param("num") Integer num);
+
+    @Query(value = "SELECT request.id\n" +
+            "FROM request, has_quantitative\n" +
+            "WHERE request.id = has_quantitative.id AND has_quantitative.quantity_type = 'Number of Premises with Garbage' AND has_quantitative.quantity < :num", nativeQuery = true)
+    List<Long> query10(@Param("num") Integer num);
+
+    @Query(value = "SELECT request.id\n" +
+            "FROM request, has_quantitative\n" +
+            "WHERE request.id = has_quantitative.id AND has_quantitative.quantity_type = 'Number of Premises with Rats' AND has_quantitative.quantity < :num", nativeQuery = true)
+    List<Long> query11(@Param("num") Integer num);
 }

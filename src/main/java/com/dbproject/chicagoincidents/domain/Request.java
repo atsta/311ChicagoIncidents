@@ -17,6 +17,7 @@ import javax.persistence.CascadeType;
 public class Request implements Serializable {
     @Id
     @GeneratedValue(strategy=GenerationType.AUTO)
+    @Column(name="id")
     private long id;
 
     @Transient
