@@ -20,6 +20,10 @@ public class RequestService {
         return requestRepository.query1(dayfrom, dayto);
     }
 
+    public List<Long> getQuery2(String dayfrom, String dayto, String type) {
+        return requestRepository.query2(dayfrom, dayto, type);
+    }
+
     public Request addRequest(Request request) {
         requestRepository.save(request);
         return request;

@@ -1,0 +1,60 @@
+<!DOCTYPE HTML>
+<html layout:decorator="layout" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.w3.org/1999/xhtml">
+<body>
+<th:block layout:fragment="content">
+    <div class="row">
+        <h3>Total requests per type that were created within a specified time range and sorted
+            in a descending order</h3>
+        <br>
+        <form method="post" class="form-group" action="/query2">
+            <div class="form-group">
+                <label for="dayfrom">From day:&nbsp;</label>
+                <br>
+                <input class="form-control" type="text" name="dayfrom" id="dayfrom" maxlength="50"/>
+            </div>
+            <br>
+            <div class="form-group">
+                <label for="dayto">To day:&nbsp;</label>
+                <br>
+                <input class="form-control" type="text" name="dayto" id="dayto" maxlength="50"/>
+            </div>
+            <br>
+            <div class="form-group">
+                <label for="type">Choose a type:</label>
+                <select class="form-control" id="type" name="type">
+                    <option value="Street Lights - All/Out">Street Lights - All/Out</option>
+                    <option value="Pothole in Street">Pothole in Street</option>
+                    <option value="Tree Debris">Tree Debris</option>
+                    <option value="Tree Trim">Tree Trim</option>
+                    <option value="Graffiti Removal">Graffiti Removal</option>
+                    <option value="Street Light - 1/Out">Street Light - 1/Out</option>
+                    <option value="Street Light Out">Street Light Out</option>
+                    <option value="Rodent Baiting/Rat Complaint">Rodent Baiting/Rat Complaint</option>
+                    <option value="Sanitation Code Violation">Sanitation Code Violation</option>
+                    <option value="Garbage Cart Black Maintenance/Replacement">Garbage Cart Black Maintenance/Replacement</option>
+                    <option value="Alley Light Out">Alley Light Out</option>
+                    <option value="Abandoned Vehicle Complaint">Abandoned Vehicle Complaint</option>
+                </select>
+            </div>
+            <br>
+            <input class="btn btn-primary" type="submit" value="Ok"/>
+        </form>
+        <br><br>
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th>Total </th>
+                <br>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="request : ${requests}">
+                <td th:text="${request} ">Count</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</th:block>
+</body>
+</html>
+

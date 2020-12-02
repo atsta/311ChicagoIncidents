@@ -3,44 +3,37 @@
 <body>
 <th:block layout:fragment="content">
     <div class="row">
-        <div class="col-md-8 col-sm-8">
-            <div class="panel panel-default">
-                <div class="panel-body">
-                    <h3>Total requests per type that were created within a specified time range and sorted
-                        in a descending order.</h3>
-                    <br>
-                    <form method="post" class="form-group" action="/query1">
-                        <div class="form-group">
-                            <label for="dayfrom">From day:&nbsp;</label>
-                            <br>
-                            <input class="form-control" type="text" name="dayfrom" id="dayfrom" maxlength="50"/>
-                        </div>
-                        <br>
-                        <div class="form-group">
-                            <label for="dayto">To day:&nbsp;</label>
-                            <br>
-                            <input class="form-control" type="text" name="dayto" id="dayto" maxlength="50"/>
-                        </div>
-                        <br>
-                        <input class="btn btn-primary" type="submit" value="Ok"/>
-                    </form>
-                    <br><br>
-                    <table class="table table-striped">
-                        <thead>
-                        <tr>
-                            <th>Total </th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <tr th:each="request : ${requests}">
-                            <td th:text="${request} ">Count</td>
-
-                        </tr>
-                        </tbody>
-                    </table>
-                </div>
+        <h3>Total requests per type that were created within a specified time range and sorted
+            in a descending order</h3>
+        <br>
+        <form method="post" class="form-group" action="/query1">
+            <div class="form-group">
+                <label for="dayfrom">From day:&nbsp;</label>
+                <br>
+                <input class="form-control" type="text" name="dayfrom" id="dayfrom" maxlength="50"/>
             </div>
-        </div>
+            <br>
+            <div class="form-group">
+                <label for="dayto">To day:&nbsp;</label>
+                <br>
+                <input class="form-control" type="text" name="dayto" id="dayto" maxlength="50"/>
+            </div>
+            <br>
+            <input class="btn btn-primary" type="submit" value="Ok"/>
+        </form>
+        <br><br>
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th>Total </th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="request : ${requests}">
+                <td th:text="${request} ">Count</td>
+            </tr>
+            </tbody>
+        </table>
     </div>
 </th:block>
 </body>

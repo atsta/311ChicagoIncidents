@@ -1,24 +1,15 @@
 <!DOCTYPE HTML>
-<html layout:decorator="layout" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.w3.org/1999/xhtml">
-<body>
-<th:block layout:fragment="content">
-    <div class="row">
-        <div class="col-md-8 col-sm-8">
-            <div class="panel panel-default">
-                <div class="panel-body">
-                    <h3>Select a query of the following list:</h3>
-                        <a th:href="@{/address}">Find all incidents that took place in a specific street</a>
-                        <br><br>
-                        <a th:href="@{/zipcode}">Find all incidents that took place in a specific zipcode</a>
-                        <br><br>
-                        <a th:href="@{/query1}">[Query 1] Find the total requests per type that were created within a specified time range and sort
-                        them in a descending order</a>
-                    <br><br>
-                </div>
-            </div>
-        </div>
-    </div>
-</th:block>
+<body xmlns:th="http://www.w3.org/1999/xhtml">
+    <h3>Select a query of the following list:</h3>
+        <a th:href="@{/address}">Find all incidents that took place in a specific street</a>
+        <br><br>
+        <a th:href="@{/zipcode}">Find all incidents that took place in a specific zipcode</a>
+        <br><br>
+        <a th:href="@{/query1}">[Query 1] Find the total requests per type that were created within a specified time range and sort
+        them in a descending order</a>
+        <br><br>
+        <a th:href="@{/query2}">[Query 2] Find the total requests per day for a specific request type and time range</a>
+        <br><br>
 </body>
 </html>
 

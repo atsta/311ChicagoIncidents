@@ -40,6 +40,21 @@ public class RequestController {
         return modelAndView;
     }
 
+    @GetMapping("/query2")
+    ModelAndView query2() {
+        ModelAndView modelAndView = new ModelAndView("query2");
+        return modelAndView;
+    }
+
+    @PostMapping(value = "query2")
+    @ResponseStatus(value = HttpStatus.OK)
+    ModelAndView query2(@RequestParam String dayfrom, @RequestParam String dayto, @RequestParam String type) throws Exception {
+        ModelAndView modelAndView = new ModelAndView("query2");
+        List<Long> query2Result = requestService.getQuery2(dayfrom, dayto, type);
+        modelAndView.addObject("requests", query2Result);
+        return modelAndView;
+    }
+
     @GetMapping("/request")
     ModelAndView request() {
         Optional<Request> dbRequest = requestService.getRequestRepository((long) 3);
