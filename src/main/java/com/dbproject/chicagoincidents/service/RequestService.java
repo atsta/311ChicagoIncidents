@@ -23,9 +23,16 @@ public class RequestService {
     public List<Long> getQuery2(String dayfrom, String dayto, String type) {
         return requestRepository.query2(dayfrom, dayto, type);
     }
+    public List<String> getQuery7() {
+        return requestRepository.query7();
+    }
 
     public List<Long> getQuery9(Integer num) {
         return requestRepository.query9(num);
+    }
+
+    public String getQuery8() {
+        return requestRepository.query8();
     }
 
     public List<Long> getQuery10(Integer num) {
@@ -34,6 +41,10 @@ public class RequestService {
 
     public List<Long> getQuery11(Integer num) {
         return requestRepository.query11(num);
+    }
+
+    public List<Integer> getQuery12() {
+        return requestRepository.query12();
     }
 
     public Request addRequest(Request request) {

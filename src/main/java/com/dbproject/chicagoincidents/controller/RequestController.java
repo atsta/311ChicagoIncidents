@@ -55,6 +55,22 @@ public class RequestController {
         return modelAndView;
     }
 
+    @GetMapping("/query7")
+    ModelAndView query7() {
+        ModelAndView modelAndView = new ModelAndView("query6_7_8_12");
+        List<String> query7Result = requestService.getQuery7();
+        modelAndView.addObject("items", query7Result);
+        return modelAndView;
+    }
+
+    @GetMapping("/query8")
+    ModelAndView query8() {
+        ModelAndView modelAndView = new ModelAndView("query6_7_8_12");
+        String query8Result = requestService.getQuery8();
+        modelAndView.addObject("items", query8Result);
+        return modelAndView;
+    }
+
     @GetMapping("/query9")
     ModelAndView query9() {
         ModelAndView modelAndView = new ModelAndView("query9_10_11");
@@ -80,8 +96,8 @@ public class RequestController {
     @ResponseStatus(value = HttpStatus.OK)
     ModelAndView query10(@RequestParam Integer num) throws Exception {
         ModelAndView modelAndView = new ModelAndView("query9_10_11");
-        List<Long> query9Result = requestService.getQuery10(num);
-        modelAndView.addObject("requests", query9Result);
+        List<Long> query10Result = requestService.getQuery10(num);
+        modelAndView.addObject("requests", query10Result);
         return modelAndView;
     }
 
@@ -95,8 +111,16 @@ public class RequestController {
     @ResponseStatus(value = HttpStatus.OK)
     ModelAndView query11(@RequestParam Integer num) throws Exception {
         ModelAndView modelAndView = new ModelAndView("query9_10_11");
-        List<Long> query9Result = requestService.getQuery11(num);
-        modelAndView.addObject("requests", query9Result);
+        List<Long> query11Result = requestService.getQuery11(num);
+        modelAndView.addObject("requests", query11Result);
+        return modelAndView;
+    }
+
+    @GetMapping("/query12")
+    ModelAndView query12() {
+        ModelAndView modelAndView = new ModelAndView("query6_7_8_12");
+        List<Integer> query12Result = requestService.getQuery12();
+        modelAndView.addObject("items", query12Result);
         return modelAndView;
     }
 
