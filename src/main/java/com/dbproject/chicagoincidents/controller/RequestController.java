@@ -1,17 +1,14 @@
 package com.dbproject.chicagoincidents.controller;
 
+import com.dbproject.chicagoincidents.domain.Location;
 import com.dbproject.chicagoincidents.domain.Request;
-import com.dbproject.chicagoincidents.repository.RequestRepository;
 import com.dbproject.chicagoincidents.service.RequestService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
-import java.awt.print.Pageable;
 import java.util.List;
 import java.util.Optional;
 
@@ -28,13 +25,20 @@ public class RequestController {
         return modelAndView;
     }
 
-    /*
-    ModelAndView home() {
-        List<String> dbRequest = requestService.getRequestsById();
-        ModelAndView modelAndView = new ModelAndView("home");
-        modelAndView.addObject("requests", dbRequest);
+    @GetMapping("/query1")
+    ModelAndView query1() {
+        ModelAndView modelAndView = new ModelAndView("query1");
         return modelAndView;
-    }*/
+    }
+
+    @PostMapping(value = "query1")
+    @ResponseStatus(value = HttpStatus.OK)
+    ModelAndView query1(@RequestParam String dayfrom, @RequestParam String dayto) throws Exception {
+        ModelAndView modelAndView = new ModelAndView("query1");
+        List<Long> query1Result = requestService.getQuery1(dayfrom, dayto);
+        modelAndView.addObject("requests", query1Result);
+        return modelAndView;
+    }
 
     @GetMapping("/request")
     ModelAndView request() {

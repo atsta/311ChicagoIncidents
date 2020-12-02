@@ -14,6 +14,11 @@ public class RequestService {
 
     @Autowired
     RequestRepository requestRepository;
+    private Long id;
+
+    public List<Long> getQuery1(String dayfrom, String dayto) {
+        return requestRepository.query1(dayfrom, dayto);
+    }
 
     public Request addRequest(Request request) {
         requestRepository.save(request);
@@ -25,6 +30,7 @@ public class RequestService {
     }
 
     public Optional<Request> getRequestRepository(Long id) {
+        this.id = id;
         return requestRepository.findById(id);
     }
 
