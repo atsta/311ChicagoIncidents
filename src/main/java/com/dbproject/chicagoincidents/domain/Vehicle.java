@@ -13,30 +13,40 @@ public class Vehicle {
     private Long vehicle_id;
 
     @Nullable
-    String license_plate;
+    @Column(name = "license_plate")
+    String licenseplate;
     @Nullable
     String model;
     @Nullable
     String color;
     @Nullable
-    Long days_abandoned;
+    @Column(name = "days_abandoned")
+    Double daysabandoned;
 
     @OneToOne(fetch = FetchType.EAGER, optional = true)
     @MapsId
     @JoinColumn(name = "id", nullable = false)
     private Request request;
 
-    public Vehicle() {}
-
-    public Vehicle(String license_plate, String model, String color, Long days_abandoned) {
-        this.license_plate = license_plate;
-        this.model = model;
-        this.color = color;
-        this.days_abandoned = days_abandoned;
+    public void setRequest(Request request) {
+        this.request = request;
     }
 
-    public String getLicense_plate() {
-        return license_plate;
+    public Request getRequest() {
+        return request;
+    }
+
+    public Vehicle() {}
+
+    public Vehicle(String licenseplate, String model, String color, Double daysabandoned) {
+        this.licenseplate = licenseplate;
+        this.model = model;
+        this.color = color;
+        this.daysabandoned = daysabandoned;
+    }
+
+    public String getLicenseplate() {
+        return licenseplate;
     }
 
     public String getModel() {
@@ -47,12 +57,12 @@ public class Vehicle {
         return color;
     }
 
-    public Long getDays_abandoned() {
-        return days_abandoned;
+    public Double getDaysabandoned() {
+        return daysabandoned;
     }
 
-    public void setLicense_plate(String license_plate) {
-        this.license_plate = license_plate;
+    public void setLicenseplate(String licenseplate) {
+        this.licenseplate = licenseplate;
     }
 
     public void setModel(String model) {
@@ -63,7 +73,7 @@ public class Vehicle {
         this.color = color;
     }
 
-    public void setDays_abandoned(Long days_abandoned) {
-        this.days_abandoned = days_abandoned;
+    public void setDaysabandoned(Double daysabandoned) {
+        this.daysabandoned = daysabandoned;
     }
 }

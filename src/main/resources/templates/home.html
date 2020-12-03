@@ -1,26 +1,40 @@
 <!DOCTYPE HTML>
 <body xmlns:th="http://www.w3.org/1999/xhtml">
     <h3>Select a query of the following list:</h3>
-        <a th:href="@{/address}">Find all incidents that took place in a specific street</a>
-        <br><br>
-        <a th:href="@{/zipcode}">Find all incidents that took place in a specific zipcode</a>
-        <br><br>
-        <a th:href="@{/query1}">[Query 1] Find the total requests per type that were created within a specified time range and sort
-        them in a descending order</a>
-        <br><br>
-        <a th:href="@{/query2}">[Query 2] Find the total requests per day for a specific request type and time range</a>
-        <br><br>
-        <a th:href="@{/query7}">[Query 7] Find the license plates (if any) that have been involved in abandoned vehicle complaints more than once</a>
-        <br><br>
-        <a th:href="@{/query8}">[Query 8] Find the second most common color of vehicles involved in abandoned vehicle complaints</a>
-        <br><br>
-        <a th:href="@{/query9}">[Query 9] Find the rodent baiting requests where the number of premises baited is less than a specified number</a>
-        <br><br>
-        <a th:href="@{/query10}">[Query 10] Find the rodent baiting requests where the number of premises with garbage is less than a specified number</a>
-        <br><br>
-        <a th:href="@{/query11}">[Query 11] Find the rodent baiting requests where the number of premises with rats is less than a specified number</a>
-        <br><br>
-        <a th:href="@{/query12}">[Query 12] Find the police districts that have handled “pot holes” requests with more than one number of potholes on
-            the same day that they also handled “rodent baiting” requests with more than one number of premises baited, for a specific day</a>
+    <a th:href="@{/address}">Find all incidents that took place in a specific street</a>
+    <br><br>
+    <a th:href="@{/zipcode}">Find all incidents that took place in a specific zipcode</a>
+    <br><br>
+    <a th:href="@{/query1}">[Query 1] Find the total requests per type that were created within a specified time range and sort
+    them in a descending order</a>
+    <br><br>
+    <a th:href="@{/query2}">[Query 2] Find the total requests per day for a specific request type and time range</a>
+    <br><br>
+    <a th:href="@{/query3}">[Query 3] Find the most common service request per zipcode for a specific day</a>
+    <br><br>
+    <a th:href="@{/query4}">[Query 4] Find the average completion time per service request for a specific date range</a>
+    <br><br>
+    <a th:href="@{/query5}">[Query 5] Find the most common service request in a specified bounding box (as designated by GPS- coordinates) for a specific day</a>
+    <br><br>
+    <a th:href="@{/query6}">[Query 6] Find the top-5 Special Service Areas (SSA) with regards to total number of requests per day
+        for a specific date range (for service requests types that SSA is available: abandoned vehicles,
+        garbage carts, graffiti removal, pot holes reported)</a>
+    <br><br>
+    <a th:href="@{/query7}">[Query 7] Find the license plates (if any) that have been involved in abandoned vehicle complaints more than once</a>
+    <br><br>
+    <a th:href="@{/query8}">[Query 8] Find the second most common color of vehicles involved in abandoned vehicle complaints</a>
+    <br><br>
+    <a th:href="@{/query9}">[Query 9] Find the rodent baiting requests where the number of premises baited is less than a specified number</a>
+    <br><br>
+    <a th:href="@{/query10}">[Query 10] Find the rodent baiting requests where the number of premises with garbage is less than a specified number</a>
+    <br><br>
+    <a th:href="@{/query11}">[Query 11] Find the rodent baiting requests where the number of premises with rats is less than a specified number</a>
+    <br><br>
+    <a th:href="@{/query12}">[Query 12] Find the police districts that have handled “pot holes” requests with more than one number of potholes on
+        the same day that they also handled “rodent baiting” requests with more than one number of premises baited, for a specific day</a>
+    <br><br>
+    <h3>Add a new incident:</h3>
+    <a th:href="@{/vehicle}">Add New Abandoned Vehicle Complaint</a>
+
 </body>
 </html>

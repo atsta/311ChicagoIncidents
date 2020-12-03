@@ -4,13 +4,15 @@ import com.sun.istack.Nullable;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.security.SecureRandom;
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
-
+import java.sql.Timestamp;
 
 @Entity
 @Table(name="request", schema = "public")
@@ -26,21 +28,29 @@ public class Request implements Serializable {
     String srn;
     String type;
     String status;
-    Date creation_date;
-    Date completion_date;
+    @Column(name="creation_date")
+    Timestamp creationdate;
+    @Column(name="completion_date")
+    Timestamp completiondate;
 
     Double ward;
-    Integer police_distinct;
-    Integer community_area;
+    @Column(name="police_distinct")
+    Integer policedistinct;
+    @Column(name="community_area")
+    Integer communityarea;
 
     @Nullable
-    Integer historical_wards;
+    @Column(name="historical_wards")
+    Integer historicalwards;
     @Nullable
-    Integer zip_codes;
+    @Column(name="zip_codes")
+    Integer zipcodes;
     @Nullable
-    Integer community_areas;
+    @Column(name="community_areas")
+    Integer communityareas;
     @Nullable
-    Integer census_tracks;
+    @Column(name="census_tracks")
+    Integer censustracks;
     @Nullable
     Integer wards;
 
@@ -67,19 +77,19 @@ public class Request implements Serializable {
 
     public Request() {}
 
-    public Request(String srn, String type, String status, Date creation_date, Date completion_date, Double ward, Integer police_distinct, Integer community_area, Integer historical_wards, Integer zip_codes, Integer community_areas, Integer census_tracks, Integer wards) {
+    public Request(String srn, String type, String status, Timestamp creationdate, Timestamp completiondate, Double ward, Integer policedistinct, Integer communityarea, Integer historicalwards, Integer zipcodes, Integer communityareas, Integer censustracks, Integer wards) {
         this.srn = srn;
         this.type = type;
         this.status = status;
-        this.creation_date = creation_date;
-        this.completion_date = completion_date;
+        this.creationdate = creationdate;
+        this.completiondate = completiondate;
         this.ward = ward;
-        this.police_distinct = police_distinct;
-        this.community_area = community_area;
-        this.historical_wards = historical_wards;
-        this.zip_codes = zip_codes;
-        this.community_areas = community_areas;
-        this.census_tracks = census_tracks;
+        this.policedistinct = policedistinct;
+        this.communityarea = communityarea;
+        this.historicalwards = historicalwards;
+        this.zipcodes = zipcodes;
+        this.communityareas = communityareas;
+        this.censustracks = censustracks;
         this.wards = wards;
     }
 
@@ -95,7 +105,18 @@ public class Request implements Serializable {
         return srn;
     }
 
-    public void setSrn(String srn) {
+    public void setSrn() {
+        final String Num = "0123456789";
+        SecureRandom rnd = new SecureRandom();
+        StringBuilder sb = new StringBuilder(2);
+
+        for(int i = 0; i < 1; i++) sb.append(Num.charAt(rnd.nextInt(Num.length())));
+        sb.append('-');
+
+        StringBuilder sb1 = new StringBuilder(10);
+        for(int i = 0; i < 7; i++) sb1.append(Num.charAt(rnd.nextInt(Num.length())));
+
+        srn = sb.toString() + sb1.toString();
         this.srn = srn;
     }
 
@@ -115,30 +136,30 @@ public class Request implements Serializable {
         this.status = status;
     }
 
-    public Date getCompletion_date() {
-        return completion_date;
+    public Timestamp getCompletiondate() {
+        return completiondate;
     }
 
     @Transient
     public String getCompletionDateFormatted() {
-        return df.format(completion_date);
+        return df.format(completiondate);
     }
 
-    public void setCompletion_date(Date completion_date) {
-        this.completion_date = completion_date;
+    public void setCompletiondate(Timestamp completiondate) {
+        this.completiondate = completiondate;
     }
 
-    public Date getCreation_date() {
-        return creation_date;
+    public Timestamp getCreationdate() {
+        return creationdate;
     }
 
     @Transient
     public String getCreationDateFormatted() {
-        return df.format(creation_date);
+        return df.format(creationdate);
     }
 
-    public void setCreation_date(Date creation_date) {
-        this.creation_date= creation_date;
+    public void setCreationdate(Timestamp creationdate) {
+        this.creationdate= creationdate;
     }
 
     public Double getWard() {
@@ -149,52 +170,52 @@ public class Request implements Serializable {
         this.ward = ward;
     }
 
-    public Integer getPolice_distinct() {
-        return police_distinct;
+    public Integer getPolicedistinct() {
+        return policedistinct;
     }
 
-    public void setPolice_distinct(Integer police_distinct) {
-        this.police_distinct = police_distinct;
+    public void setPolicedistinct(Integer policedistinct) {
+        this.policedistinct = policedistinct;
     }
 
-    public Integer getCommunity_area() {
-        return community_area;
+    public Integer getCommunityarea() {
+        return communityarea;
     }
 
-    public void setCommunity_area(Integer community_area) {
-        this.community_area = community_area;
+    public void setCommunityarea(Integer communityarea) {
+        this.communityarea = communityarea;
     }
 
-    public Integer getHistorical_wards() {
-        return historical_wards;
+    public Integer getHistoricalwards() {
+        return historicalwards;
     }
 
-    public void setHistorical_wards(Integer historical_wards) {
-        this.historical_wards = historical_wards;
+    public void setHistoricalwards(Integer historicalwards) {
+        this.historicalwards = historicalwards;
     }
 
-    public Integer getZip_codes() {
-        return zip_codes;
+    public Integer getZipcodes() {
+        return zipcodes;
     }
 
-    public void setZip_codes(Integer zip_codes) {
-        this.zip_codes = zip_codes;
+    public void setZipcodes(Integer zipcodes) {
+        this.zipcodes = zipcodes;
     }
 
-    public Integer getCommunity_areas() {
-        return community_areas;
+    public Integer getCommunityareas() {
+        return communityareas;
     }
 
-    public void setCommunity_areas(Integer community_areas) {
-        this.community_areas = community_areas;
+    public void setCommunityareas(Integer communityareas) {
+        this.communityareas = communityareas;
     }
 
-    public Integer getCensus_tracks() {
-        return census_tracks;
+    public Integer getCensustracks() {
+        return censustracks;
     }
 
-    public void setCensus_tracks(Integer census_tracks) {
-        this.census_tracks = census_tracks;
+    public void setCensustracks(Integer censustracks) {
+        this.censustracks = censustracks;
     }
 
     public Integer getWards() {

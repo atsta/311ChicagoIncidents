@@ -13,8 +13,10 @@ public class Location {
     String address;
     @Column(name="zip_codes")
     Integer zipcodes;
-    Double x_coordinate;
-    Double y_coordinate;
+    @Column(name="x_coordinate")
+    Double xcoordinate;
+    @Column(name="y_coordinate")
+    Double ycoordinate;
     Double latitude;
     Double longitude;
 
@@ -24,35 +26,39 @@ public class Location {
     @JoinColumn(name = "id", nullable = false)
     private Request request;
 
+    public void setRequest(Request request) {
+        this.request = request;
+    }
+
     public Request getRequest() {
         return request;
     }
 
     public Location() {}
 
-    public Location(String address, Integer zip_codes, Double x_coordinate, Double y_coordinate, Double latitude, Double longitude) {
+    public Location(String address, Integer zipcodes, Double xcoordinate, Double ycoordinate, Double latitude, Double longitude) {
         this.address = address;
-        this.zipcodes = zip_codes;
-        this.x_coordinate = x_coordinate;
-        this.y_coordinate = y_coordinate;
+        this.zipcodes = zipcodes;
+        this.xcoordinate = xcoordinate;
+        this.ycoordinate = ycoordinate;
         this.latitude = latitude;
         this. longitude = longitude;
     }
 
-    public Double getX_coordinate() {
-        return x_coordinate;
+    public Double getXcoordinate() {
+        return xcoordinate;
     }
 
-    public void setX_coordinate(Double x_coordinate) {
-        this.x_coordinate = x_coordinate;
+    public void setXcoordinate(Double xcoordinate) {
+        this.xcoordinate = xcoordinate;
     }
 
-    public Double getY_coordinate() {
-        return y_coordinate;
+    public Double getYcoordinate() {
+        return ycoordinate;
     }
 
-    public void setY_coordinate(Double y_coordinate) {
-        this.y_coordinate = y_coordinate;
+    public void setYcoordinate(Double ycoordinate) {
+        this.ycoordinate = ycoordinate;
     }
 
     public Double getLatitude() {
@@ -83,8 +89,8 @@ public class Location {
         return zipcodes;
     }
 
-    public void setZip_codes(Integer zip_codes) {
-        this.zipcodes = zip_codes;
+    public void setZipcodes(Integer zipcodes) {
+        this.zipcodes = zipcodes;
     }
 
 }

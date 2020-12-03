@@ -1,7 +1,9 @@
 package com.dbproject.chicagoincidents.controller;
 
+import com.dbproject.chicagoincidents.domain.HasSSA;
 import com.dbproject.chicagoincidents.domain.Location;
 import com.dbproject.chicagoincidents.domain.Request;
+import com.dbproject.chicagoincidents.domain.Vehicle;
 import com.dbproject.chicagoincidents.service.RequestService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -9,6 +11,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.sql.Timestamp;
+import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -123,6 +128,66 @@ public class RequestController {
         modelAndView.addObject("items", query12Result);
         return modelAndView;
     }
+
+    @GetMapping("/vehicle")
+    ModelAndView vehicle() {
+        ModelAndView modelAndView = new ModelAndView("vehicle");
+        return modelAndView;
+    }
+
+    @PostMapping(value = "vehicle")
+    @ResponseStatus(value = HttpStatus.OK)
+    ModelAndView addStudent(@RequestParam String lic_plate,
+                            @RequestParam String maker,
+                            @RequestParam String color,
+                            @RequestParam Double days_abandoned,
+                            @RequestParam String address,
+                            @RequestParam Integer zipcode,
+                            @RequestParam Double x_coord,
+                            @RequestParam Double y_coord,
+                            @RequestParam Double lat,
+                            @RequestParam Double longit,
+                            @RequestParam Integer ssa) throws Exception {
+
+        ModelAndView modelAndView = new ModelAndView("vehicle");
+        try {
+            Request request = new Request();
+            request.setSrn();
+            Date date= new Date();
+            long time = date.getTime();
+            Timestamp ts = new Timestamp(time);
+            request.setCreationdate(ts);
+            request.setType("Abandoned Vehicle Complaint");
+            request.setStatus("Open");
+
+            Location location = new Location();
+            location.setRequest(request);
+            location.setAddress(address);
+            location.setZipcodes(zipcode);
+            location.setLatitude(lat);
+            location.setLongitude(longit);
+            location.setXcoordinate(x_coord);
+            location.setYcoordinate(y_coord);
+
+            HasSSA hasSSA = new HasSSA();
+            hasSSA.setRequest(request);
+            hasSSA.setSsavalue(ssa);
+
+            Vehicle vehicle = new Vehicle();
+            vehicle.setRequest(request);
+            vehicle.setDaysabandoned(days_abandoned);
+            vehicle.setModel(maker);
+            vehicle.setColor(color);
+            vehicle.setLicenseplate(lic_plate);
+
+            //student = studentService.addStudent(student);
+        }
+        catch (Exception ex){
+            modelAndView.addObject("message", "Failed to add student: " + ex.getMessage());
+        }
+        return modelAndView;
+    }
+
 
     @GetMapping("/request")
     ModelAndView request() {

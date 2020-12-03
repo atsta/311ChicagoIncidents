@@ -1,0 +1,79 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+<th:block layout:fragment="content">
+    <div class="row">
+        <h3>Add New Abandoned Vehicle Complaint</h3>
+        <form method="post" class="form-group" th:action="@{/vehicle}">
+            <div class="form-group">
+                <label for="lic_plate">License Plate:&nbsp;</label>
+                <br>
+                <input class="form-control" type="text" name="lic_plate" id="lic_plate" maxlength="50"/>
+            </div>
+            <br>
+            <div class="form-group">
+                <label for="maker">Vehicle Model:&nbsp;</label>
+                <br>
+                <input class="form-control" type="text" name="maker" id="maker" maxlength="50"/>
+            </div>
+            <br>
+            <div class="form-group">
+                <label for="color">Vehicle Color:&nbsp;</label>
+                <br>
+                <input class="form-control" type="text" name="color" id="color" maxlength="50"/>
+            </div>
+            <br>
+            <div class="form-group">
+                <label for="days_abandoned">How Many Days Has the Vehicle Been Reported as Parked?</label>
+                <br>
+                <input class="form-control" type="number" name="days_abandoned" id="days_abandoned" maxlength="5"/>
+            </div>
+            <br>
+            <div class="form-group">
+                <label for="address">Street Address:&nbsp;</label>
+                <br>
+                <input class="form-control" type="text" name="address" id="address" maxlength="50"/>
+            </div>
+            <br>
+            <div class="form-group">
+                <label for="zipcode">Zip Code:&nbsp;</label>
+                <br>
+                <input class="form-control" type="number" name="zipcode" id="zipcode" maxlength="50"/>
+            </div>
+            <br>
+            <div class="form-group">
+                <label for="x_coord">X Coordinate:&nbsp;</label>
+                <br>
+                <input class="form-control" type="number" step="0.00000001" name="x_coord" id="x_coord" maxlength="50"/>
+            </div>
+            <br>
+            <div class="form-group">
+                <label for="y_coord">Y Coordinate:&nbsp;</label>
+                <br>
+                <input class="form-control" type="number" step="0.00000001" name="y_coord" id="y_coord" maxlength="50"/>
+            </div>
+            <br>
+            <div class="form-group">
+                <label for="lat">Latitude&nbsp;</label>
+                <br>
+                <input class="form-control" type="number" step="0.00000000001" name="lat" id="lat" maxlength="50"/>
+            </div>
+            <br>
+            <div class="form-group">
+                <label for="longit">Longitude:&nbsp;</label>
+                <br>
+                <input class="form-control" type="number" step="0.00000000001" name="longit" id="longit" maxlength="50"/>
+            </div>
+            <br>
+            <div class="form-group">
+                <label for="ssa">Special Service Area:&nbsp;</label>
+                <br>
+                <input class="form-control" type="number" name="ssa" id="ssa" maxlength="50"/>
+            </div>
+            <br>
+            <input class="btn btn-primary" type="submit" value="Save"/>
+        </form>
+    </div>
+</th:block>
+</body>
+</html>

@@ -10,24 +10,29 @@ public class HasSSA {
     @Column(name = "id")
     private long ssa_id;
 
-    Integer ssa_value;
+    @Column(name = "ssa_value")
+    Integer ssavalue;
 
     @OneToOne(fetch = FetchType.EAGER, optional = true)
     @MapsId
     @JoinColumn(name = "id", nullable = false)
     private Request request;
 
+    public void setRequest(Request request) {
+        this.request = request;
+    }
+
     public HasSSA() {}
 
-    public HasSSA(Integer ssa_value) {
-        this.ssa_value = ssa_value;
+    public HasSSA(Integer ssavalue) {
+        this.ssavalue = ssavalue;
     }
 
-    public Integer getSsa_value() {
-        return ssa_value;
+    public Integer getSsavalue() {
+        return ssavalue;
     }
 
-    public void setSsa_value(Integer ssa_value) {
-        this.ssa_value = ssa_value;
+    public void setSsavalue(Integer ssavalue) {
+        this.ssavalue = ssavalue;
     }
 }
