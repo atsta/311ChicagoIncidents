@@ -68,6 +68,9 @@ public class RequestService {
 
     public Long getNextSeriesId() {
         return requestRepository.getNextSeriesId();
+    }
 
+    public Long getNextSeriesQuantitativeId() {
+        return requestRepository.getNextSeriesQuantitativeId();
     }
 }

@@ -72,7 +72,7 @@ public class Request implements Serializable {
     @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "request")
     private Specification specification;
 
-    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL,orphanRemoval = true, mappedBy = "request")
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "request")
     private Set<Quantitative> quantitative;
 
     public Request() {}

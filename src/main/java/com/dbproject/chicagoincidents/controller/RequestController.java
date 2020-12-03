@@ -1,9 +1,6 @@
 package com.dbproject.chicagoincidents.controller;
 
-import com.dbproject.chicagoincidents.domain.HasSSA;
-import com.dbproject.chicagoincidents.domain.Location;
-import com.dbproject.chicagoincidents.domain.Request;
-import com.dbproject.chicagoincidents.domain.Vehicle;
+import com.dbproject.chicagoincidents.domain.*;
 import com.dbproject.chicagoincidents.service.RequestService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -139,17 +136,16 @@ public class RequestController {
     @PostMapping(value = "vehicle")
     @ResponseStatus(value = HttpStatus.OK)
     ModelAndView addVehicleRequest(@RequestParam String lic_plate,
-                            @RequestParam String maker,
-                            @RequestParam String color,
-                            @RequestParam Double days_abandoned,
-                            @RequestParam String address,
-                            @RequestParam Integer zipcode,
-                            @RequestParam Double x_coord,
-                            @RequestParam Double y_coord,
-                            @RequestParam Double lat,
-                            @RequestParam Double longit,
-                            @RequestParam Integer ssa) throws Exception {
-
+                                    @RequestParam String maker,
+                                    @RequestParam String color,
+                                    @RequestParam Double days_abandoned,
+                                    @RequestParam String address,
+                                    @RequestParam Integer zipcode,
+                                    @RequestParam Double x_coord,
+                                    @RequestParam Double y_coord,
+                                    @RequestParam Double lat,
+                                    @RequestParam Double longit,
+                                    @RequestParam Integer ssa) throws Exception {
         ModelAndView modelAndView = new ModelAndView("vehicle");
         try {
             Request request = new Request();
@@ -191,11 +187,81 @@ public class RequestController {
 
         }
         catch (Exception ex){
-            modelAndView.addObject("message", "Failed to add student: " + ex.getMessage());
+            modelAndView.addObject("message", "Failed to add incident: " + ex.getMessage());
         }
         return modelAndView;
     }
 
+    @GetMapping("/quantitative")
+    ModelAndView quantitative() {
+        ModelAndView modelAndView = new ModelAndView("quantitative");
+        return modelAndView;
+    }
+
+    @PostMapping(value = "quantitative")
+    @ResponseStatus(value = HttpStatus.OK)
+    ModelAndView quantitative(@RequestParam String quantity_type,
+                              @RequestParam Double quantity,
+                              @RequestParam String address,
+                               @RequestParam Integer zipcode,
+                               @RequestParam Double x_coord,
+                               @RequestParam Double y_coord,
+                               @RequestParam Double lat,
+                               @RequestParam Double longit,
+                               @RequestParam Integer ssa) throws Exception {
+        ModelAndView modelAndView = new ModelAndView("quantitative");
+        try {
+            Request request = new Request();
+            request.setID(requestService.getNextSeriesId());
+            request.setSrn();
+            SimpleDateFormat formatter = new SimpleDateFormat(
+                    "yyyy-MM-dd");
+            Date date= formatter.parse(formatter.format(new Date()));
+            long time = date.getTime();
+            Timestamp ts = new Timestamp(time);
+            request.setCreationdate(ts);
+            switch (quantity_type) {
+                case "Potholes filled on block":
+                    request.setType("Pothole in Street");
+                    break;
+                case "Number of Black Carts Delivered":
+                    request.setType("Garbage Cart Black Maintenance/Replacement");
+                    break;
+            }
+            request.setStatus("Open");
+            requestService.addRequest(request);
+
+            Location location = new Location();
+            location.setRequest(request);
+            location.setAddress(address);
+            location.setZipcodes(zipcode);
+            location.setLatitude(lat);
+            location.setLongitude(longit);
+            location.setXcoordinate(x_coord);
+            location.setYcoordinate(y_coord);
+            request.setLocation(location);;
+
+            HasSSA hasSSA = new HasSSA();
+            hasSSA.setRequest(request);
+            hasSSA.setSsavalue(ssa);
+            request.setHasSSA(hasSSA);
+
+            requestService.addRequest(request);
+
+            Quantitative quantitative = new Quantitative();
+            quantitative.setQuantitativeid(requestService.getNextSeriesQuantitativeId());
+            quantitative.setRequest(request);
+            quantitative.setQuantitytype(quantity_type);
+            quantitative.setQuantity(quantity);
+            request.getQuantitative().add(quantitative);
+
+            requestService.addRequest(request);
+        }
+        catch (Exception ex){
+            modelAndView.addObject("message", "Failed to add incident: " + ex.getMessage());
+        }
+        return modelAndView;
+    }
 
     @GetMapping("/request")
     ModelAndView request() {

@@ -5,42 +5,47 @@ import com.sun.istack.Nullable;
 import javax.persistence.*;
 
 @Entity
-@Table(name="has_Quantitative", schema = "public")
+@Table(name="has_quantitative", schema = "public")
 public class Quantitative {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private long quantitative_id;
+    //@GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name="quantitative_id")
+    private Long quantitativeid;
 
-    String quantity_type;
+    @Column(name="quantity_type")
+    String quantitytype;
     @Nullable
     Double quantity;
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id", nullable = false)
     private Request request;
 
-
     public Quantitative() {}
 
-    public Quantitative(String quantity_type, Double quantity) {
-        this.quantity_type = quantity_type;
+    public Quantitative(String quantitytype, Double quantity) {
+        this.quantitytype = quantitytype;
         this.quantity = quantity;
     }
 
-    public long getQuantitative_id() {
-        return quantitative_id;
+    public void setRequest(Request request) {
+        this.request = request;
     }
 
-    public void setQuantitative_id(long quantitative_id) {
-        this.quantitative_id = quantitative_id;
+    public Long getQuantitativeid() {
+        return quantitativeid;
     }
 
-    public String getQuantity_type() {
-        return quantity_type;
+    public void setQuantitativeid(Long quantitativeid) {
+        this.quantitativeid = quantitativeid;
     }
 
-    public void setQuantity_type(String quantity_type) {
-        this.quantity_type = quantity_type;
+    public String getQuantitytype() {
+        return quantitytype;
+    }
+
+    public void setQuantitytype(String quantitytype) {
+        this.quantitytype = quantitytype;
     }
 
     public Double getQuantity() {
