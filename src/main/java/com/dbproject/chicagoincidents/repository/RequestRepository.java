@@ -15,6 +15,9 @@ public interface RequestRepository extends CrudRepository<Request, Long>{
     @Query("SELECT srn FROM Request WHERE id>2 and id<9")
     List<String> queryAnnotationTest1();
 
+    @Query(value ="SELECT nextval('request_id_seq')", nativeQuery = true)
+    Long getNextSeriesId();
+
     @Query(value = "SELECT COUNT(id) AS res FROM request GROUP BY type, creation_date HAVING creation_date " +
             "BETWEEN cast(:dayfrom AS timestamp) AND cast(:dayto AS timestamp) ORDER BY res DESC", nativeQuery = true)
     List<Long> query1(@Param("dayfrom") String dayfrom, @Param("dayto") String dayto);

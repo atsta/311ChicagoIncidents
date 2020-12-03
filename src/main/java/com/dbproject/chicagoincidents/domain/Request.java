@@ -1,12 +1,11 @@
 package com.dbproject.chicagoincidents.domain;
 
 import com.sun.istack.Nullable;
+import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 import java.io.Serializable;
 import java.security.SecureRandom;
-import java.time.LocalDateTime;
-import java.util.Date;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Set;
@@ -18,9 +17,10 @@ import java.sql.Timestamp;
 @Table(name="request", schema = "public")
 public class Request implements Serializable {
     @Id
-    @GeneratedValue(strategy=GenerationType.AUTO)
+    //@SequenceGenerator(name="pk_sequence",sequenceName="request_id_seq", allocationSize=1)
+    //@GeneratedValue(strategy = GenerationType.AUTO, generator="pk_sequence")
     @Column(name="id")
-    private long id;
+    private Long id;
 
     @Transient
     private final DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
@@ -57,22 +57,22 @@ public class Request implements Serializable {
     @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "request")
     private Location location;
 
-    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.REMOVE, mappedBy = "request")
+    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "request")
     private Vehicle vehicle;
 
-    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.REMOVE, mappedBy = "request")
+    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "request")
     private HasSSA hasSSA;
 
-    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.REMOVE, mappedBy = "request")
+    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "request")
     private Activities activities;
 
-    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.REMOVE, mappedBy = "request")
+    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "request")
     private RelativeLocation relativeLocation;
 
-    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.REMOVE, mappedBy = "request")
+    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "request")
     private Specification specification;
 
-    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.REMOVE,orphanRemoval = true, mappedBy = "request")
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL,orphanRemoval = true, mappedBy = "request")
     private Set<Quantitative> quantitative;
 
     public Request() {}
@@ -92,12 +92,66 @@ public class Request implements Serializable {
         this.censustracks = censustracks;
         this.wards = wards;
     }
+    public void setLocation(Location location) {
+        this.location = location;
+    }
 
-    public long getId() {
+    public void setVehicle(Vehicle vehicle) {
+        this.vehicle = vehicle;
+    }
+
+    public void setHasSSA(HasSSA hasSSA) {
+        this.hasSSA = hasSSA;
+    }
+
+    public void setActivities(Activities activities) {
+        this.activities = activities;
+    }
+
+    public void setRelativeLocation(RelativeLocation relativeLocation) {
+        this.relativeLocation = relativeLocation;
+    }
+
+    public void setSpecification(Specification specification) {
+        this.specification = specification;
+    }
+
+    public void setQuantitative(Set<Quantitative> quantitative) {
+        this.quantitative = quantitative;
+    }
+    public Location getLocation() {
+        return location;
+    }
+
+    public Vehicle getVehicle() {
+        return vehicle;
+    }
+
+    public HasSSA getHasSSA() {
+        return hasSSA;
+    }
+
+    public Activities getActivities() {
+        return activities;
+    }
+
+    public RelativeLocation getRelativeLocation() {
+        return relativeLocation;
+    }
+
+    public Specification getSpecification() {
+        return specification;
+    }
+
+    public Set<Quantitative> getQuantitative() {
+        return quantitative;
+    }
+
+    public Long getId() {
         return id;
     }
 
-    public void setID(Integer id) {
+    public void setID(Long id) {
         this.id = id;
     }
 
@@ -110,11 +164,11 @@ public class Request implements Serializable {
         SecureRandom rnd = new SecureRandom();
         StringBuilder sb = new StringBuilder(2);
 
-        for(int i = 0; i < 1; i++) sb.append(Num.charAt(rnd.nextInt(Num.length())));
+        for(int i = 0; i < 2; i++) sb.append(Num.charAt(rnd.nextInt(Num.length())));
         sb.append('-');
 
         StringBuilder sb1 = new StringBuilder(10);
-        for(int i = 0; i < 7; i++) sb1.append(Num.charAt(rnd.nextInt(Num.length())));
+        for(int i = 0; i < 8; i++) sb1.append(Num.charAt(rnd.nextInt(Num.length())));
 
         srn = sb.toString() + sb1.toString();
         this.srn = srn;

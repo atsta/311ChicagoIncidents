@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
@@ -137,7 +138,7 @@ public class RequestController {
 
     @PostMapping(value = "vehicle")
     @ResponseStatus(value = HttpStatus.OK)
-    ModelAndView addStudent(@RequestParam String lic_plate,
+    ModelAndView addVehicleRequest(@RequestParam String lic_plate,
                             @RequestParam String maker,
                             @RequestParam String color,
                             @RequestParam Double days_abandoned,
@@ -152,13 +153,17 @@ public class RequestController {
         ModelAndView modelAndView = new ModelAndView("vehicle");
         try {
             Request request = new Request();
+            request.setID(requestService.getNextSeriesId());
             request.setSrn();
-            Date date= new Date();
+            SimpleDateFormat formatter = new SimpleDateFormat(
+                    "yyyy-MM-dd");
+            Date date= formatter.parse(formatter.format(new Date()));
             long time = date.getTime();
             Timestamp ts = new Timestamp(time);
             request.setCreationdate(ts);
             request.setType("Abandoned Vehicle Complaint");
             request.setStatus("Open");
+            requestService.addRequest(request);
 
             Location location = new Location();
             location.setRequest(request);
@@ -168,10 +173,12 @@ public class RequestController {
             location.setLongitude(longit);
             location.setXcoordinate(x_coord);
             location.setYcoordinate(y_coord);
+            request.setLocation(location);;
 
             HasSSA hasSSA = new HasSSA();
             hasSSA.setRequest(request);
             hasSSA.setSsavalue(ssa);
+            request.setHasSSA(hasSSA);
 
             Vehicle vehicle = new Vehicle();
             vehicle.setRequest(request);
@@ -179,8 +186,9 @@ public class RequestController {
             vehicle.setModel(maker);
             vehicle.setColor(color);
             vehicle.setLicenseplate(lic_plate);
+            request.setVehicle(vehicle);
+            requestService.addRequest(request);
 
-            //student = studentService.addStudent(student);
         }
         catch (Exception ex){
             modelAndView.addObject("message", "Failed to add student: " + ex.getMessage());
@@ -191,7 +199,7 @@ public class RequestController {
 
     @GetMapping("/request")
     ModelAndView request() {
-        Optional<Request> dbRequest = requestService.getRequestRepository((long) 3);
+        Optional<Request> dbRequest = requestService.getRequest((long) 3);
 
         if(dbRequest.isPresent()) {
             Request existingRequest = dbRequest.get();

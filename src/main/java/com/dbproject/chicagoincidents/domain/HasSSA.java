@@ -6,9 +6,9 @@ import javax.persistence.*;
 @Table(name="has_SSA", schema = "public")
 public class HasSSA {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "id")
-    private long ssa_id;
+    //@GeneratedValue(strategy = GenerationType.AUTO)
+    //@Column(name = "id")
+    private long id;
 
     @Column(name = "ssa_value")
     Integer ssavalue;

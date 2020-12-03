@@ -47,18 +47,18 @@ public class RequestService {
         return requestRepository.query12();
     }
 
-    public Request addRequest(Request request) {
-        requestRepository.save(request);
-        return request;
-    }
-
     public Iterable<Request> getRequests(){
         return requestRepository.findAll();
     }
 
-    public Optional<Request> getRequestRepository(Long id) {
+    public Optional<Request> getRequest(Long id) {
         this.id = id;
         return requestRepository.findById(id);
+    }
+
+    public Request addRequest(Request request) {
+        requestRepository.save(request);
+        return request;
     }
 
     public List<String> getRequestsById(){
@@ -66,4 +66,8 @@ public class RequestService {
         return dbRequest;
     }
 
+    public Long getNextSeriesId() {
+        return requestRepository.getNextSeriesId();
+
+    }
 }
