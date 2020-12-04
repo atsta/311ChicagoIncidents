@@ -1,0 +1,35 @@
+<!DOCTYPE HTML>
+<html layout:decorator="layout" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.w3.org/1999/xhtml">
+<body>
+<th:block layout:fragment="content">
+    <div class="row">
+        <h3>Most common service request per zipcode for a specific day</h3>
+        <br>
+        <form method="post" class="form-group" action="/query3">
+            <div class="form-group">
+                <label for="day">Enter a day:&nbsp;</label>
+                <br>
+                <input class="form-control" type="text" name="day" id="day" maxlength="50"/>
+            </div>
+            <br>
+            <input class="btn btn-primary" type="submit" value="Ok"/>
+        </form>
+        <br><br>
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th>Results </th>
+                <br>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="item : ${items}">
+                <td th:text="${item} ">Count</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</th:block>
+</body>
+</html>
+

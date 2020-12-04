@@ -7,7 +7,6 @@ import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
-import java.sql.Timestamp;
 import java.util.List;
 
 @Repository
@@ -31,6 +30,42 @@ public interface RequestRepository extends CrudRepository<Request, Long>{
             "HAVING creation_date BETWEEN cast(:dayfrom AS timestamp) AND " +
             "cast(:dayto AS timestamp) AND type = :type", nativeQuery = true)
     List<Long> query2(@Param("dayfrom") String dayfrom, @Param("dayto") String dayto, @Param("type") String type);
+
+    @Query(value = "SELECT concat(tmp.zip_codes, ': ',MAX(tmp.res))\n" +
+            "FROM \n" +
+            "(\n" +
+            "SELECT  zip_codes, type, COUNT(id) AS res\n" +
+            "FROM request\n" +
+            "WHERE creation_date = cast(:day AS timestamp)" +
+            "GROUP BY type, zip_codes) tmp GROUP BY tmp.zip_codes", nativeQuery = true)
+    List<String> query3(@Param("day") String day);
+
+    @Query(value = "SELECT concat(type,': ',date_part('day', AVG(AGE(completion_date,creation_date))), ' days')  \n \n" +
+            "FROM request\n" +
+            "WHERE completion_date IS NOT null AND completion_date BETWEEN cast(:dayfrom AS timestamp) AND cast(:dayto AS timestamp)" +
+            "AND creation_date BETWEEN cast(:dayfrom AS timestamp) AND cast(:dayto AS timestamp)" +
+            "GROUP BY type", nativeQuery = true)
+    List<String> query4(@Param("dayfrom") String dayfrom, @Param("dayto") String dayto);
+
+    @Query(value = "SELECT concat(temp.mxtype, ': ', temp.mx) FROM (SELECT  occ.type as mxtype, MAX(occ.res) mx,\n" +
+            "ROW_NUMBER () OVER (ORDER BY  MAX(occ.res) DESC) AS row_num\n" +
+            "FROM (Select type, count(location.id) as res\n" +
+            "\t\tfrom request, location\n" +
+            "\t   where location.x_coordinate BETWEEN :xlow AND :xhigh AND location.y_coordinate BETWEEN :ylow AND :yhigh AND creation_date = cast(:day AS timestamp)\n" +
+            "\t   group by request.type) occ\n" +
+            "group by occ.type) temp\n" +
+            "WHERE temp.row_num <= 1\n", nativeQuery = true)
+    List<String> query5(@Param("day") String day, @Param("xlow") Double xlow, @Param("ylow") Double ylow, @Param("xhigh") Double xhigh, @Param("yhigh") Double yhigh);
+
+    @Query(value = "SELECT temp.ssa_value FROM (SELECT  ssa_value,\n" +
+            "ROW_NUMBER () OVER (ORDER BY COUNT(has_ssa.id) DESC) AS row_num\n" +
+            "FROM has_ssa, request \n" +
+            "\t\t\t   where ssa_value is not null AND \n" +
+            "\t\t\t   has_ssa.id = request.id AND \n" +
+            "\t\t\t   request.creation_date BETWEEN cast(:dayfrom AS timestamp) AND cast(:dayto AS timestamp)\n" +
+            "\t\t\t   GROUP BY ssa_value) temp\n" +
+            "WHERE temp.row_num <= 5", nativeQuery = true)
+    List<Integer> query6(@Param("dayfrom") String dayfrom, @Param("dayto") String dayto);
 
     @Query(value = "SELECT license_plate \n" +
             "FROM vehicle\n" +

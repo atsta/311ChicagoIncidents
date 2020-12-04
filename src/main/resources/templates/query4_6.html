@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <h3>Enter the required parameters:</h3>
+    <form method="post" class="form-group" >
+        <div class="form-group">
+            <label for="dayfrom">From day:&nbsp;</label>
+            <br>
+            <input class="form-control" type="text" name="dayfrom" id="dayfrom" maxlength="50"/>
+        </div>
+        <br>
+        <div class="form-group">
+            <label for="dayto">To day:&nbsp;</label>
+            <br>
+            <input class="form-control" type="text" name="dayto" id="dayto" maxlength="50"/>
+        </div>
+        <br>
+        <input class="btn btn-primary" type="submit" value="Ok"/>
+    </form>
+    <br>
+    <br>
+    <h3>Results:</h3>
+    <table class="table table-striped">
+        <thead>
+        </thead>
+        <tbody>
+        <tr th:each="item : ${items}">
+            <td th:text="${item}  ">Item</td>
+            <br>
+        </tr>
+        </tbody>
+    </table>
+</head>
+<body>
+</body>
+</html>

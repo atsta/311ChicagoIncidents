@@ -18,7 +18,6 @@ public class Location {
     Double latitude;
     Double longitude;
 
-
     @OneToOne(fetch = FetchType.EAGER, optional = true)
     @MapsId
     @JoinColumn(name = "id", nullable = false)

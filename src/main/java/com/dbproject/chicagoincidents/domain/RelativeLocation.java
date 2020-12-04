@@ -18,18 +18,18 @@ public class RelativeLocation {
     @JoinColumn(name = "id", nullable = false)
     private Request request;
 
+    public RelativeLocation() {}
+
+    public RelativeLocation(String relativelocation) {
+        this.relativelocation = relativelocation;
+    }
+
     public Request getRequest() {
         return request;
     }
 
     public void setRequest(Request request) {
         this.request = request;
-    }
-
-    public RelativeLocation() {}
-
-    public RelativeLocation(String relativelocation) {
-        this.relativelocation = relativelocation;
     }
 
     public String getRelativelocation() {

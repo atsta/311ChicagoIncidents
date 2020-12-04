@@ -10,10 +10,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
-import java.time.LocalDateTime;
-import java.util.Date;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 @Controller
 @RequestMapping("/")
@@ -55,6 +52,66 @@ public class RequestController {
         ModelAndView modelAndView = new ModelAndView("query2");
         List<Long> query2Result = requestService.getQuery2(dayfrom, dayto, type);
         modelAndView.addObject("requests", query2Result);
+        return modelAndView;
+    }
+
+    @GetMapping("/query3")
+    ModelAndView query3() {
+        ModelAndView modelAndView = new ModelAndView("query3");
+        return modelAndView;
+    }
+
+    @PostMapping(value = "query3")
+    @ResponseStatus(value = HttpStatus.OK)
+    ModelAndView query3(@RequestParam String day) throws Exception {
+        ModelAndView modelAndView = new ModelAndView("query3");
+        List<String> query3Result = requestService.getQuery3(day);
+        modelAndView.addObject("items", query3Result);
+        return modelAndView;
+    }
+
+    @GetMapping("/query4")
+    ModelAndView query4() {
+        ModelAndView modelAndView = new ModelAndView("query4_6");
+        return modelAndView;
+    }
+
+    @PostMapping(value = "query4")
+    @ResponseStatus(value = HttpStatus.OK)
+    ModelAndView query4(@RequestParam String dayfrom, @RequestParam String dayto) throws Exception {
+        ModelAndView modelAndView = new ModelAndView("query4_6");
+        List<String> query4Result = requestService.getQuery4(dayfrom, dayto);
+        modelAndView.addObject("items", query4Result);
+        return modelAndView;
+    }
+
+    @GetMapping("/query5")
+    ModelAndView query5() {
+        ModelAndView modelAndView = new ModelAndView("query5");
+        return modelAndView;
+    }
+
+    @PostMapping(value = "query5")
+    @ResponseStatus(value = HttpStatus.OK)
+    ModelAndView query5(@RequestParam String day, @RequestParam Double xlow, @RequestParam Double xhigh, @RequestParam Double ylow, @RequestParam Double yhigh ) throws Exception {
+        ModelAndView modelAndView = new ModelAndView("query5");
+        List<String> query5Result = requestService.getQuery5(day, xlow, ylow, xhigh, yhigh);
+        modelAndView.addObject("items", query5Result);
+        return modelAndView;
+    }
+
+    @GetMapping("/query6")
+    ModelAndView query6() {
+        ModelAndView modelAndView = new ModelAndView("query4_6");
+        return modelAndView;
+    }
+
+    @PostMapping(value = "query6")
+    @ResponseStatus(value = HttpStatus.OK)
+    ModelAndView query6(@RequestParam String dayfrom, @RequestParam String dayto) throws Exception {
+        ModelAndView modelAndView = new ModelAndView("query4_6");
+        List<Integer> query6Result = requestService.getQuery6(dayfrom, dayto);
+        modelAndView.addObject("items", query6Result);
         return modelAndView;
     }
 
@@ -183,6 +240,12 @@ public class RequestController {
             vehicle.setColor(color);
             vehicle.setLicenseplate(lic_plate);
             request.setVehicle(vehicle);
+
+            Activities act = new Activities();
+            act.setRequest(request);
+            act.setCurrentactivity(null);
+            act.setMostrecentaction(null);
+            request.setActivities(act);
             requestService.addRequest(request);
 
         }
@@ -252,6 +315,12 @@ public class RequestController {
             quantitative.setQuantitytype(quantity_type);
             quantitative.setQuantity(quantity);
             request.getQuantitative().add(quantitative);
+
+            Activities act = new Activities();
+            act.setRequest(request);
+            act.setCurrentactivity(null);
+            act.setMostrecentaction(null);
+            request.setActivities(act);
             requestService.addRequest(request);
         }
         catch (Exception ex){
@@ -322,6 +391,12 @@ public class RequestController {
             bait.setQuantitytype("Number of Premises Baited");
             bait.setQuantity(baited);
             request.getQuantitative().add(bait);
+
+            Activities act = new Activities();
+            act.setRequest(request);
+            act.setCurrentactivity(null);
+            act.setMostrecentaction(null);
+            request.setActivities(act);
             requestService.addRequest(request);
         }
         catch (Exception ex){
@@ -423,6 +498,12 @@ public class RequestController {
             rloc.setRequest(request);
             rloc.setRelativelocation(loc);
             request.setRelativeLocation(rloc);
+
+            Activities act = new Activities();
+            act.setRequest(request);
+            act.setCurrentactivity(null);
+            act.setMostrecentaction(null);
+            request.setActivities(act);
             requestService.addRequest(request);
         }
         catch (Exception ex){
@@ -540,21 +621,4 @@ public class RequestController {
         }
         return modelAndView;
     }
-
-    @GetMapping("/request")
-    ModelAndView request() {
-        Optional<Request> dbRequest = requestService.getRequest((long) 3);
-
-        if(dbRequest.isPresent()) {
-            Request existingRequest = dbRequest.get();
-            ModelAndView modelAndView = new ModelAndView("request");
-            modelAndView.addObject("request", existingRequest);
-            return modelAndView;
-        } else {
-            //there is no Request in the repo with 'id'
-            ModelAndView modelAndView = new ModelAndView("error");
-            return modelAndView;
-        }
-    }
-
 }

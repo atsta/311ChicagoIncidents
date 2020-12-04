@@ -8,14 +8,15 @@ import javax.persistence.*;
 @Table(name="has_Activities", schema = "public")
 public class Activities {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "id")
-    private long activities_id;
+    private long id;
 
     @Nullable
-    String current_activity;
+    @Column(name= "current_activity")
+    String currentactivity;
+
     @Nullable
-    String most_recent_action;
+    @Column(name = "most_recent_action")
+    String mostrecentaction;
 
     @OneToOne(fetch = FetchType.EAGER, optional = true)
     @MapsId
@@ -24,24 +25,28 @@ public class Activities {
 
     public Activities() {}
 
-    public Activities(String current_activity, String most_recent_action) {
-        this.current_activity = current_activity;
-        this.most_recent_action = most_recent_action;
+    public Activities(String currentactivity, String mostrecentaction) {
+        this.currentactivity = currentactivity;
+        this.mostrecentaction = mostrecentaction;
     }
 
-    public String getCurrent_activity() {
-        return current_activity;
+    public void setRequest(Request request) {
+        this.request = request;
     }
 
-    public void setCurrent_activity(String current_activity) {
-        this.current_activity = current_activity;
+    public String getCurrentactivity() {
+        return currentactivity;
     }
 
-    public String getMost_recent_action() {
-        return most_recent_action;
+    public void setCurrentactivity(String currentactivity) {
+        this.currentactivity = currentactivity;
     }
 
-    public void setMost_recent_action(String most_recent_action) {
-        this.most_recent_action = most_recent_action;
+    public String getMostrecentaction() {
+        return mostrecentaction;
+    }
+
+    public void setMostrecentaction(String mostrecentaction) {
+        this.mostrecentaction = mostrecentaction;
     }
 }

@@ -23,6 +23,20 @@ public class RequestService {
     public List<Long> getQuery2(String dayfrom, String dayto, String type) {
         return requestRepository.query2(dayfrom, dayto, type);
     }
+    public List<String> getQuery3(String day) {
+        return requestRepository.query3(day);
+    }
+    public List<String> getQuery4(String dayfrom, String dayto) {
+        return requestRepository.query4(dayfrom, dayto);
+    }
+    public List<String> getQuery5(String day, Double xlow, Double ylow, Double xhigh, Double yhigh) {
+        return requestRepository.query5(day, xlow, ylow, xhigh, yhigh);
+    }
+
+    public List<Integer> getQuery6(String dayfrom, String dayto) {
+        return requestRepository.query6(dayfrom, dayto);
+    }
+
     public List<String> getQuery7() {
         return requestRepository.query7();
     }

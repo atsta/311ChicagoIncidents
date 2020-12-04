@@ -8,8 +8,6 @@ import javax.persistence.*;
 @Table(name="vehicle", schema = "public")
 public class Vehicle {
     @Id
-    //@GeneratedValue(strategy = GenerationType.AUTO)
-    //@Column(name = "id")
     private Long id;
 
     @Nullable

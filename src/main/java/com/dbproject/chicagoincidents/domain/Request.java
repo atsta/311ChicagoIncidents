@@ -18,8 +18,6 @@ import java.sql.Timestamp;
 @Table(name="request", schema = "public")
 public class Request implements Serializable {
     @Id
-    //@SequenceGenerator(name="pk_sequence",sequenceName="request_id_seq", allocationSize=1)
-    //@GeneratedValue(strategy = GenerationType.AUTO, generator="pk_sequence")
     @Column(name="id")
     private Long id;
 
