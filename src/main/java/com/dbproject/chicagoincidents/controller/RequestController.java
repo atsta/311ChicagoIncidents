@@ -252,7 +252,6 @@ public class RequestController {
             quantitative.setQuantitytype(quantity_type);
             quantitative.setQuantity(quantity);
             request.getQuantitative().add(quantitative);
-
             requestService.addRequest(request);
         }
         catch (Exception ex){
@@ -323,7 +322,217 @@ public class RequestController {
             bait.setQuantitytype("Number of Premises Baited");
             bait.setQuantity(baited);
             request.getQuantitative().add(bait);
+            requestService.addRequest(request);
+        }
+        catch (Exception ex){
+            modelAndView.addObject("message", "Failed to add incident: " + ex.getMessage());
+        }
+        return modelAndView;
+    }
 
+
+    @GetMapping("/light")
+    ModelAndView light() {
+        ModelAndView modelAndView = new ModelAndView("light");
+        return modelAndView;
+    }
+
+    @PostMapping(value = "light")
+    @ResponseStatus(value = HttpStatus.OK)
+    ModelAndView light(@RequestParam String comp_type,
+                       @RequestParam String address,
+                        @RequestParam Integer zipcode,
+                        @RequestParam Double x_coord,
+                        @RequestParam Double y_coord,
+                        @RequestParam Double lat,
+                        @RequestParam Double longit) throws Exception {
+        ModelAndView modelAndView = new ModelAndView("light");
+        try {
+            Request request = new Request();
+            request.setID(requestService.getNextSeriesId());
+            request.setSrn();
+            SimpleDateFormat formatter = new SimpleDateFormat(
+                    "yyyy-MM-dd");
+            Date date= formatter.parse(formatter.format(new Date()));
+            long time = date.getTime();
+            Timestamp ts = new Timestamp(time);
+            request.setCreationdate(ts);
+            request.setType(comp_type);
+            request.setStatus("Open");
+            requestService.addRequest(request);
+
+            Location location = new Location();
+            location.setRequest(request);
+            location.setAddress(address);
+            location.setZipcodes(zipcode);
+            location.setLatitude(lat);
+            location.setLongitude(longit);
+            location.setXcoordinate(x_coord);
+            location.setYcoordinate(y_coord);
+            request.setLocation(location);
+            requestService.addRequest(request);
+        }
+        catch (Exception ex){
+            modelAndView.addObject("message", "Failed to add incident: " + ex.getMessage());
+        }
+        return modelAndView;
+    }
+
+    @GetMapping("/tree")
+    ModelAndView tree() {
+        ModelAndView modelAndView = new ModelAndView("tree");
+        return modelAndView;
+    }
+
+    @PostMapping(value = "tree")
+    @ResponseStatus(value = HttpStatus.OK)
+    ModelAndView tree(@RequestParam String comp_type,
+                      @RequestParam String loc,
+                      @RequestParam String address,
+                       @RequestParam Integer zipcode,
+                       @RequestParam Double x_coord,
+                       @RequestParam Double y_coord,
+                       @RequestParam Double lat,
+                       @RequestParam Double longit) throws Exception {
+        ModelAndView modelAndView = new ModelAndView("tree");
+        try {
+            Request request = new Request();
+            request.setID(requestService.getNextSeriesId());
+            request.setSrn();
+            SimpleDateFormat formatter = new SimpleDateFormat(
+                    "yyyy-MM-dd");
+            Date date= formatter.parse(formatter.format(new Date()));
+            long time = date.getTime();
+            Timestamp ts = new Timestamp(time);
+            request.setCreationdate(ts);
+            request.setType(comp_type);
+            request.setStatus("Open");
+            requestService.addRequest(request);
+
+            Location location = new Location();
+            location.setRequest(request);
+            location.setAddress(address);
+            location.setZipcodes(zipcode);
+            location.setLatitude(lat);
+            location.setLongitude(longit);
+            location.setXcoordinate(x_coord);
+            location.setYcoordinate(y_coord);
+            request.setLocation(location);
+
+            RelativeLocation rloc = new RelativeLocation();
+            rloc.setRequest(request);
+            rloc.setRelativelocation(loc);
+            request.setRelativeLocation(rloc);
+            requestService.addRequest(request);
+        }
+        catch (Exception ex){
+            modelAndView.addObject("message", "Failed to add incident: " + ex.getMessage());
+        }
+        return modelAndView;
+    }
+
+    @GetMapping("/graffiti")
+    ModelAndView graffiti() {
+        ModelAndView modelAndView = new ModelAndView("graffiti");
+        return modelAndView;
+    }
+
+    @PostMapping(value = "graffiti")
+    @ResponseStatus(value = HttpStatus.OK)
+    ModelAndView graffiti(@RequestParam String sur,
+                      @RequestParam String loc,
+                      @RequestParam String address,
+                      @RequestParam Integer zipcode,
+                      @RequestParam Double x_coord,
+                      @RequestParam Double y_coord,
+                      @RequestParam Double lat,
+                      @RequestParam Double longit) throws Exception {
+        ModelAndView modelAndView = new ModelAndView("graffiti");
+        try {
+            Request request = new Request();
+            request.setID(requestService.getNextSeriesId());
+            request.setSrn();
+            SimpleDateFormat formatter = new SimpleDateFormat(
+                    "yyyy-MM-dd");
+            Date date= formatter.parse(formatter.format(new Date()));
+            long time = date.getTime();
+            Timestamp ts = new Timestamp(time);
+            request.setCreationdate(ts);
+            request.setType("Graffiti Removal");
+            request.setStatus("Open");
+            requestService.addRequest(request);
+
+            Location location = new Location();
+            location.setRequest(request);
+            location.setAddress(address);
+            location.setZipcodes(zipcode);
+            location.setLatitude(lat);
+            location.setLongitude(longit);
+            location.setXcoordinate(x_coord);
+            location.setYcoordinate(y_coord);
+            request.setLocation(location);
+
+            RelativeLocation rloc = new RelativeLocation();
+            rloc.setRequest(request);
+            rloc.setRelativelocation(loc);
+            request.setRelativeLocation(rloc);
+
+            Specification surface = new Specification();
+            surface.setRequest(request);
+            surface.setSpecification(sur);
+            request.setSpecification(surface);
+            requestService.addRequest(request);
+        }
+        catch (Exception ex){
+            modelAndView.addObject("message", "Failed to add incident: " + ex.getMessage());
+        }
+        return modelAndView;
+    }
+
+    @GetMapping("/sanitation")
+    ModelAndView sanitation() {
+        ModelAndView modelAndView = new ModelAndView("sanitation");
+        return modelAndView;
+    }
+
+    @PostMapping(value = "sanitation")
+    @ResponseStatus(value = HttpStatus.OK)
+    ModelAndView sanitation(@RequestParam String nat,
+                          @RequestParam String address,
+                          @RequestParam Integer zipcode,
+                          @RequestParam Double x_coord,
+                          @RequestParam Double y_coord,
+                          @RequestParam Double lat,
+                          @RequestParam Double longit) throws Exception {
+        ModelAndView modelAndView = new ModelAndView("sanitation");
+        try {
+            Request request = new Request();
+            request.setID(requestService.getNextSeriesId());
+            request.setSrn();
+            SimpleDateFormat formatter = new SimpleDateFormat(
+                    "yyyy-MM-dd");
+            Date date= formatter.parse(formatter.format(new Date()));
+            long time = date.getTime();
+            Timestamp ts = new Timestamp(time);
+            request.setCreationdate(ts);
+            request.setType("Sanitation Code Violation");
+            request.setStatus("Open");
+            requestService.addRequest(request);
+
+            Location location = new Location();
+            location.setRequest(request);
+            location.setAddress(address);
+            location.setZipcodes(zipcode);
+            location.setLatitude(lat);
+            location.setLongitude(longit);
+            location.setXcoordinate(x_coord);
+            location.setYcoordinate(y_coord);
+            request.setLocation(location);
+
+            Specification nature = new Specification();
+            nature.setRequest(request);
+            nature.setSpecification(nat);
+            request.setSpecification(nature);
             requestService.addRequest(request);
         }
         catch (Exception ex){

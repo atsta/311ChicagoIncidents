@@ -6,9 +6,7 @@ import javax.persistence.*;
 @Table(name="has_specification", schema = "public")
 public class Specification {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "id")
-    private long specification_id;
+    private long id;
 
     String specification;
 
@@ -21,6 +19,14 @@ public class Specification {
 
     public Specification(String specification) {
         this.specification = specification;
+    }
+
+    public void setRequest(Request request) {
+        this.request = request;
+    }
+
+    public Request getRequest() {
+        return request;
     }
 
     public String getSpecification() {

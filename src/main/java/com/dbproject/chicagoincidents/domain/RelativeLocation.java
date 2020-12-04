@@ -8,29 +8,35 @@ import javax.persistence.*;
 @Table(name="has_relative_location", schema = "public")
 public class RelativeLocation {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "id")
-    private long relative_location_id;
+    private long id;
 
-    @Nullable
-    String relative_location;
+    @Column(name = "relative_location")
+    String relativelocation;
 
     @OneToOne(fetch = FetchType.EAGER, optional = true)
     @MapsId
     @JoinColumn(name = "id", nullable = false)
     private Request request;
 
+    public Request getRequest() {
+        return request;
+    }
+
+    public void setRequest(Request request) {
+        this.request = request;
+    }
+
     public RelativeLocation() {}
 
-    public RelativeLocation(String relative_location) {
-        this.relative_location = relative_location;
+    public RelativeLocation(String relativelocation) {
+        this.relativelocation = relativelocation;
     }
 
-    public String getRelative_location() {
-        return relative_location;
+    public String getRelativelocation() {
+        return relativelocation;
     }
 
-    public void setRelative_location(String relative_location) {
-        this.relative_location = relative_location;
+    public void setRelativelocation(String relativelocation) {
+        this.relativelocation = relativelocation;
     }
 }

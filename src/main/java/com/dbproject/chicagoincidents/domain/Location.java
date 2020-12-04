@@ -6,9 +6,6 @@ import javax.persistence.*;
 @Table(name="location", schema = "public")
 public class Location {
     @Id
-    //@SequenceGenerator(name="pk_sequence",sequenceName="request_id_seq", allocationSize=1)
-    //@GeneratedValue(strategy = GenerationType.AUTO, generator="pk_sequence")
-    //@Column(name = "id")
     private long id;
 
     String address;
