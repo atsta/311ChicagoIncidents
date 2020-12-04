@@ -8,6 +8,7 @@ import java.io.Serializable;
 import java.security.SecureRandom;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -73,7 +74,7 @@ public class Request implements Serializable {
     private Specification specification;
 
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "request")
-    private Set<Quantitative> quantitative;
+    private Set<Quantitative> quantitative = new HashSet<Quantitative>();;
 
     public Request() {}
 

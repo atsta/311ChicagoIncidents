@@ -8,7 +8,6 @@ import javax.persistence.*;
 @Table(name="has_quantitative", schema = "public")
 public class Quantitative {
     @Id
-    //@GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name="quantitative_id")
     private Long quantitativeid;
 
@@ -45,6 +44,7 @@ public class Quantitative {
     }
 
     public void setQuantitytype(String quantitytype) {
+
         this.quantitytype = quantitytype;
     }
 
@@ -53,6 +53,7 @@ public class Quantitative {
     }
 
     public void setQuantity(Double quantity) {
+
         this.quantity = quantity;
     }
 }

@@ -246,14 +246,83 @@ public class RequestController {
             hasSSA.setSsavalue(ssa);
             request.setHasSSA(hasSSA);
 
-            requestService.addRequest(request);
-
             Quantitative quantitative = new Quantitative();
             quantitative.setQuantitativeid(requestService.getNextSeriesQuantitativeId());
             quantitative.setRequest(request);
             quantitative.setQuantitytype(quantity_type);
             quantitative.setQuantity(quantity);
             request.getQuantitative().add(quantitative);
+
+            requestService.addRequest(request);
+        }
+        catch (Exception ex){
+            modelAndView.addObject("message", "Failed to add incident: " + ex.getMessage());
+        }
+        return modelAndView;
+    }
+
+    @GetMapping("/rodent")
+    ModelAndView rodent() {
+        ModelAndView modelAndView = new ModelAndView("rodent");
+        return modelAndView;
+    }
+
+    @PostMapping(value = "rodent")
+    @ResponseStatus(value = HttpStatus.OK)
+    ModelAndView rodent(@RequestParam Double rats,
+                        @RequestParam Double garbage,
+                        @RequestParam Double baited,
+                        @RequestParam String address,
+                          @RequestParam Integer zipcode,
+                          @RequestParam Double x_coord,
+                          @RequestParam Double y_coord,
+                          @RequestParam Double lat,
+                          @RequestParam Double longit) throws Exception {
+        ModelAndView modelAndView = new ModelAndView("quantitative");
+        try {
+            Request request = new Request();
+            request.setID(requestService.getNextSeriesId());
+            request.setSrn();
+            SimpleDateFormat formatter = new SimpleDateFormat(
+                    "yyyy-MM-dd");
+            Date date= formatter.parse(formatter.format(new Date()));
+            long time = date.getTime();
+            Timestamp ts = new Timestamp(time);
+            request.setCreationdate(ts);
+            request.setType("Rodent Baiting/Rat Complaint");
+            request.setStatus("Open");
+            requestService.addRequest(request);
+
+            Location location = new Location();
+            location.setRequest(request);
+            location.setAddress(address);
+            location.setZipcodes(zipcode);
+            location.setLatitude(lat);
+            location.setLongitude(longit);
+            location.setXcoordinate(x_coord);
+            location.setYcoordinate(y_coord);
+            request.setLocation(location);;
+
+            Quantitative rat = new Quantitative();
+            rat.setQuantitativeid(requestService.getNextSeriesQuantitativeId());
+            rat.setRequest(request);
+            rat.setQuantitytype("Number of Premises with Rats");
+            rat.setQuantity(rats);
+            request.getQuantitative().add(rat);
+
+            Quantitative qgarbage = new Quantitative();
+            qgarbage.setQuantitativeid(requestService.getNextSeriesQuantitativeId());
+            qgarbage.setRequest(request);
+            qgarbage.setQuantitytype("Number of Premises with Garbage");
+            qgarbage.setQuantity(garbage);
+            request.getQuantitative().add(qgarbage);
+
+            Quantitative bait = new Quantitative();
+            bait.setQuantitativeid(requestService.getNextSeriesQuantitativeId());
+            bait.setRequest(request);
+            bait.setQuantitytype("Number of Premises Baited");
+            bait.setQuantity(baited);
+            request.getQuantitative().add(bait);
 
             requestService.addRequest(request);
         }

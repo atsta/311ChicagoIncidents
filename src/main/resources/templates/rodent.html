@@ -3,20 +3,24 @@
 <body>
 <th:block layout:fragment="content">
     <div class="row">
-        <h3>Add New Incident</h3>
-        <form method="post" class="form-group" th:action="@{/quantitative}">
+        <h3>Add New Rodent Baiting Incident</h3>
+        <form method="post" class="form-group" th:action="@{/rodent}">
             <div class="form-group">
-                <label for="quantity_type">Choose a type:</label>
-                <select class="form-control" id="quantity_type" name="quantity_type">
-                    <option value="Potholes filled on block">Potholes filled on block</option>
-                    <option value="Number of Black Carts Delivered">Number of Black Carts Delivered</option>
-                </select>
+                <label for="rats">Number of Premises with Rats:&nbsp;</label>
+                <br>
+                <input class="form-control" type="number" step="0.0000000001" name="rats" id="rats" maxlength="50"/>
             </div>
             <br>
             <div class="form-group">
-                <label for="quantity">Quantity:&nbsp;</label>
+                <label for="garbage">Number of Premises with Garbage:&nbsp;</label>
                 <br>
-                <input class="form-control" type="number" step="0.0000000001" name="quantity" id="quantity" maxlength="50"/>
+                <input class="form-control" type="number" step="0.0000000001" name="garbage" id="garbage" maxlength="50"/>
+            </div>
+            <br>
+            <div class="form-group">
+                <label for="baited">Number of Premises Baited:&nbsp;</label>
+                <br>
+                <input class="form-control" type="number" step="0.0000000001" name="baited" id="baited" maxlength="50"/>
             </div>
             <br>
             <div class="form-group">
@@ -53,12 +57,6 @@
                 <label for="longit">Longitude:&nbsp;</label>
                 <br>
                 <input class="form-control" type="number" step="0.0000000000001" name="longit" id="longit" maxlength="50"/>
-            </div>
-            <br>
-            <div class="form-group">
-                <label for="ssa">Special Service Area:</label>
-                <br>
-                <input class="form-control" type="number" name="ssa" id="ssa" maxlength="50"/>
             </div>
             <br>
             <input class="btn btn-primary" type="submit" value="Save"/>
