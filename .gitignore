@@ -57,4 +57,4 @@ hs_err_pid*
 *.tar.gz
 *.rar
 
-application.properties
+src/main/resources/application.properties
