@@ -20,16 +20,20 @@ public interface RequestRepository extends CrudRepository<Request, Long>{
     @Query(value ="SELECT nextval('has_quantitative_quantitative_id_seq')", nativeQuery = true)
     Long getNextSeriesQuantitativeId();
 
-    @Query(value = "SELECT COUNT(id) AS res FROM request GROUP BY type, creation_date HAVING creation_date " +
-            "BETWEEN cast(:dayfrom AS timestamp) AND cast(:dayto AS timestamp) ORDER BY res DESC", nativeQuery = true)
-    List<Long> query1(@Param("dayfrom") String dayfrom, @Param("dayto") String dayto);
+    @Query(value = "SELECT concat(tmp.type, ': ', tmp.res)\n" +
+            "FROM (SELECT type, COUNT(id) AS res\n" +
+            "FROM request\n" +
+            "GROUP BY type, creation_date \n" +
+            "HAVING creation_date BETWEEN cast(:dayfrom AS timestamp) AND cast(:dayto AS timestamp)\n" +
+            "ORDER BY res DESC) tmp", nativeQuery = true)
+    List<String> query1(@Param("dayfrom") String dayfrom, @Param("dayto") String dayto);
 
-    @Query(value = "SELECT COUNT(id) AS res\n" +
+    @Query(value = "SELECT concat(creation_date, ': ', res) FROM (SELECT creation_date, COUNT(id) AS res\n" +
             "FROM request\n" +
             "GROUP BY type, creation_date\n" +
             "HAVING creation_date BETWEEN cast(:dayfrom AS timestamp) AND " +
-            "cast(:dayto AS timestamp) AND type = :type", nativeQuery = true)
-    List<Long> query2(@Param("dayfrom") String dayfrom, @Param("dayto") String dayto, @Param("type") String type);
+            "cast(:dayto AS timestamp) AND type = :type) tmp", nativeQuery = true)
+    List<String> query2(@Param("dayfrom") String dayfrom, @Param("dayto") String dayto, @Param("type") String type);
 
     @Query(value = "SELECT concat(tmp.zip_codes, ': ',MAX(tmp.res))\n" +
             "FROM \n" +

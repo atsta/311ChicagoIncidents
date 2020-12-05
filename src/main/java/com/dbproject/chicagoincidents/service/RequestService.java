@@ -16,11 +16,11 @@ public class RequestService {
     RequestRepository requestRepository;
     private Long id;
 
-    public List<Long> getQuery1(String dayfrom, String dayto) {
+    public List<String> getQuery1(String dayfrom, String dayto) {
         return requestRepository.query1(dayfrom, dayto);
     }
 
-    public List<Long> getQuery2(String dayfrom, String dayto, String type) {
+    public List<String> getQuery2(String dayfrom, String dayto, String type) {
         return requestRepository.query2(dayfrom, dayto, type);
     }
     public List<String> getQuery3(String day) {

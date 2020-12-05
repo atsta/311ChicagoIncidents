@@ -35,7 +35,7 @@ public class RequestController {
     @ResponseStatus(value = HttpStatus.OK)
     ModelAndView query1(@RequestParam String dayfrom, @RequestParam String dayto) throws Exception {
         ModelAndView modelAndView = new ModelAndView("query1");
-        List<Long> query1Result = requestService.getQuery1(dayfrom, dayto);
+        List<String> query1Result = requestService.getQuery1(dayfrom, dayto);
         modelAndView.addObject("requests", query1Result);
         return modelAndView;
     }
@@ -50,7 +50,7 @@ public class RequestController {
     @ResponseStatus(value = HttpStatus.OK)
     ModelAndView query2(@RequestParam String dayfrom, @RequestParam String dayto, @RequestParam String type) throws Exception {
         ModelAndView modelAndView = new ModelAndView("query2");
-        List<Long> query2Result = requestService.getQuery2(dayfrom, dayto, type);
+        List<String> query2Result = requestService.getQuery2(dayfrom, dayto, type);
         modelAndView.addObject("requests", query2Result);
         return modelAndView;
     }
