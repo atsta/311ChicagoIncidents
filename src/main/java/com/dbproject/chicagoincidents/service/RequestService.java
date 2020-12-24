@@ -26,9 +26,11 @@ public class RequestService {
     public List<String> getQuery3(String day) {
         return requestRepository.query3(day);
     }
+
     public List<String> getQuery4(String dayfrom, String dayto) {
         return requestRepository.query4(dayfrom, dayto);
     }
+
     public List<String> getQuery5(String day, Double xlow, Double ylow, Double xhigh, Double yhigh) {
         return requestRepository.query5(day, xlow, ylow, xhigh, yhigh);
     }
