@@ -5,11 +5,11 @@ Access to the database through a Web Application for the Residents of Chicago to
 Reports are used by the city to offer recovery, sanitation.
 Data available at: https://www.kaggle.com/chicago/chicago-311-service-requests
 
-# Queries that user can execute
+# Functionalities available through the Web interface
 
 1. Find the total requests per type that were created within a specified time range and sort them in a descending order.
 2. Find the total requests per day for a specific request type and time range.
-3.Find the most common service request per zipcode for a specific day.
+3. Find the most common service request per zipcode for a specific day.
 4. Find the average completion time per service request for a specific date range.
 5. Find the most common service request in a specified bounding box (as designated by GPS- coordinates) for a specific day.
 6. Find the top-5 Special Service Areas (SSA) with regards to total number of requests per day for a specific date range.
@@ -20,7 +20,7 @@ Data available at: https://www.kaggle.com/chicago/chicago-311-service-requests
 11. Same as the above (i.e., 10) for premises with rats.
 12. Find the police districts that have handled “pot holes” requests with more than one number of potholes on the same day that they also handled “rodent baiting” requests with more than one number of premises baited, for a specific day.
 
-Any type of new complaint request, can be inserted, as well.
+New complaint report. Any type of new complaint request, can be inserted to the database, as well. 
 
 # Implementation
 
